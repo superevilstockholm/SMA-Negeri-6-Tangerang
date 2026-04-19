@@ -9,9 +9,12 @@ Route::get('/', function () {
     return view('pages.index');
 })->name('index');
 
-// Auth
-Route::get('/login', [AuthController::class, 'login_view'])->name('login_view');
-Route::post('/login', [AuthController::class, 'login_attempt'])->name('login_attempt');
+// Guest
+Route::middleware('guest')->group(function () {
+    // Auth
+    Route::get('/login', [AuthController::class, 'login_view'])->name('login_view');
+    Route::post('/login', [AuthController::class, 'login_attempt'])->name('login_attempt');
+});
 
 // Protected
 Route::middleware('auth')->group(function () {
