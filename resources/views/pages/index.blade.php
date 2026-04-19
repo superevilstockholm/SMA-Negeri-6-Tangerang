@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1><i class="bi bi-house"></i> Hello this is home page!</h1>
+                    <h3><i class="bi bi-house"></i> Hello this is home page!</h3>
                 </div>
             </div>
         </div>
