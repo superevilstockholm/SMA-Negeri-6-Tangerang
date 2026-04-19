@@ -20,6 +20,14 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::get('/', fn () => 'Hello this is dashboard page!')->name('index');
+        // Admin
+        Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+            Route::get('/', fn () => 'Hello this is admin dashboard page!')->name('index');
+        });
+
+        // Teacher
+        Route::middleware('role:teacher')->prefix('teacher')->name('teacher.')->group(function () {
+            Route::get('/', fn () => 'Hello this is teacher dashboard page!')->name('index');
+        });
     });
 });
