@@ -19,9 +19,17 @@ class AuthController extends Controller
         return view('pages.auth.login');
     }
 
-    public function login_attempt(): RedirectResponse
+    public function login_attempt(LoginRequest $request): RedirectResponse
     {
+        $credentials = $request->validated();
 
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors('Login failed. Invalid email or password')->withInput();
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->route('dashboard.' . $request->user()->role->value . '.index')->with('success', 'Login successful!');
     }
 
     public function logout_attempt(Request $request): RedirectResponse
