@@ -1,0 +1,91 @@
+<footer data-bs-theme="dark">
+    <div class="bg-primary-dark py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <a class="text-decoration-none" href="{{ route('index') }}">
+                                <img class="d-block" src="{{ asset('static/img/logo-sman6tng.png') }}" alt="Logo {{ config('app.name') }}" width="60">
+                            </a>
+                        </div>
+                        <div class="col-12">
+                            <b>SMAN 6 Tangerang</b> is an educational institution that is committed to producing a superior, character-based, and globally competitive generation.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="{{ route('index') }}">About</a>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#our-purpose">Our Purpose</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#vision-and-mission">Vision & Mission</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#leadership">Leadership</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#community">Community</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#faq">FAQ</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="#">Student Life</a>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Extracuricular</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Recognition & Awards</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Stories of Impact</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="#">Others</a>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Blog</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">News</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Events</a>
+                                </div>
+                                <div class="nav-item">
+                                    <a class="nav-link" href="#">Contact Us</a>
+                                </div>
+                                <div class="nav-item d-flex align-items-center gap-3">
+                                    <a class="nav-link" href="https://www.instagram.com/sman6tangerang/" target="_blank">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                    <a class="nav-link" href="https://www.youtube.com/channel/UC_-pnhlijU9dajU5BSCAZng/" target="_blank">
+                                        <i class="bi bi-youtube"></i>
+                                    </a>
+                                    <a class="nav-link" href="https://x.com/sman6tng/" target="_blank">
+                                        <i class="bi bi-twitter-x"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center fs-09">
+                        Copyright &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,16 +1,16 @@
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Host Grotesk', sans-serif;
 }
 
-.ff-inter {
-    font-family: 'Inter', sans-serif !important;
+.bg-primary-dark {
+    background-color: #002155 !important;
+    color: var(--bs-body-color);
 }
-.ff-open-sans {
-    font-family: 'Open Sans', sans-serif !important;
-}
-.ff-pt-sans {
-    font-family: 'PT Sans', sans-serif !important;
-}
+
 .ff-host-grotesk {
     font-family: 'Host Grotesk', sans-serif !important;
+}
+
+.fs-09 {
+    font-size: 0.9rem !important;
 }

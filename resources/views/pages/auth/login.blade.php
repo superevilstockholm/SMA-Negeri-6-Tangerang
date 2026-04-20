@@ -1,21 +1,21 @@
 @extends('layouts.base')
 @section('title', 'Login')
 @section('content')
-    <section class="vh-100">
+    <section class="vh-100 bg-primary-dark" data-bs-theme="dark">
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center justify-content-center">
                 <div class="d-none d-lg-block col-lg-8 h-100 ps-0 overflow-hidden">
                     <img class="h-100 object-fit-cover" src="{{ asset('static/img/login-placeholder.webp') }}" alt="Login Placeholder">
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center">
-                    <div class="card shadow-none border-0" style="max-width: 350px;">
+                    <div class="card bg-transparent shadow-none border-0" style="max-width: 350px;">
                         <div class="card-body">
                             <h1 class="h3 text-center fw-semibold mb-0">WELCOME BACK</h1>
-                            <p class="text-muted text-center fw-medium ff-open-sans">Login to your account to access your dashboard!</p>
-                            <form class="p-0 m-0" action="{{ route('login_attempt') }}" method="POST">
+                            <p class="text-muted text-center fw-medium">Login to your account to access your dashboard!</p>
+                            <form class="p-0 m-0" action="{{ route('login_attempt') }}" method="POST" data-bs-theme="light">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <label class="mb-2 fw-medium" for="email">Email</label>
+                                    <label class="mb-2 fw-medium" for="email">Email Address</label>
                                     <div class="input-group input-group-sm">
                                         <input class="form-control" type="text" name="email" id="email" autofocus required>
                                     </div>
