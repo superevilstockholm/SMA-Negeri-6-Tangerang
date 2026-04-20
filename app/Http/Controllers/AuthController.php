@@ -24,7 +24,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
-            return back()->withErrors('Login failed. Invalid email or password')->withInput();
+            return back()->withErrors('Login failed, invalid email or password')->withInput();
         }
 
         $request->session()->regenerate();
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect()->route('login_view')->with('success', 'Logout successful!');
     }
 }
