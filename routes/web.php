@@ -19,10 +19,10 @@ Route::middleware('guest')->group(function () {
 // Protected
 Route::middleware('auth')->group(function () {
     // Auth
-    Route::post('logout', [AuthController::class, 'logout_attempt'])->name('logout_attempt');
+    Route::post('/logout', [AuthController::class, 'logout_attempt'])->name('logout_attempt');
 
     // Dashboard
-    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::prefix('/dashboard')->name('dashboard.')->group(function () {
         // Admin
         Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
             Route::get('/', fn () => 'Hello this is admin dashboard page!')->name('index');
