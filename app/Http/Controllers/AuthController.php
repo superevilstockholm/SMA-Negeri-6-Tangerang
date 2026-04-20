@@ -16,7 +16,12 @@ class AuthController extends Controller
 {
     public function login_view(): View
     {
-        return view('pages.auth.login');
+        return view('pages.auth.login', [
+            'meta' => [
+                'showNavbar' => false,
+                'showFooter' => false,
+            ],
+        ]);
     }
 
     public function login_attempt(LoginRequest $request): RedirectResponse
