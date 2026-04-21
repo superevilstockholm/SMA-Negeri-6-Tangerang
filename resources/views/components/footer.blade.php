@@ -65,7 +65,7 @@
                                 <div class="nav-item">
                                     <a class="nav-link" href="#">Contact Us</a>
                                 </div>
-                                <div class="nav-item d-flex align-items-center gap-3">
+                                <div class="nav-item d-flex align-items-center gap-3 social-links">
                                     <a class="nav-link" href="https://www.instagram.com/sman6tangerang/" target="_blank">
                                         <i class="bi bi-instagram"></i>
                                     </a>
@@ -89,3 +89,13 @@
         </div>
     </div>
 </footer>
+@push('css')
+    <style>
+        footer .nav-item .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        footer .nav-item:not(.social-links) .nav-link:hover {
+            transform: translateX(10px) scale(1.1);
+        }
+    </style>
+@endpush

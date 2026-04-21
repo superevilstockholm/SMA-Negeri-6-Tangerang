@@ -16,7 +16,7 @@
                 </li>
                 <div class="nav-item d-none d-lg-block">
                     <div class="nav-link">
-                        <span class="vr"></span>
+                        <span class="vr opacity-100"></span>
                     </div>
                 </div>
                 <li class="nav-item">
@@ -49,7 +49,7 @@
     <script>
         let lastScrollY = window.scrollY;
         const navbar = document.querySelector('.navbar');
-        const threshold = 10;
+        const threshold = 6;
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             if (currentScrollY > lastScrollY && currentScrollY > 80) {

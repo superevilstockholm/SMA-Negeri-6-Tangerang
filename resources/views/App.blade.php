@@ -20,6 +20,21 @@
     {{-- JS --}}
     <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ asset('static/js/sweetalert2.min.js') }}" defer></script>
+    <script src="{{ asset('static/js/lenis.min.js') }}" defer></script>
     @stack('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const lenis = new Lenis({
+                lerp: 0.08,
+                smoothWheel: true,
+                smoothScroll: true,
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        });
+    </script>
 </body>
 </html>

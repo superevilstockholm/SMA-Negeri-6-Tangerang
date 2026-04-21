@@ -14,3 +14,7 @@
 .fs-09 {
     font-size: 0.9rem !important;
 }
+
+html {
+    scroll-behavior: auto;
+}

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Home')
 @section('content')
-    <section class="vh-100">
+    <section style="height: 720px;">
         <div class="container">
             <div class="row">
                 <div class="col">
