@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 // Auth Controller
 use App\Http\Controllers\AuthController;
 
+// Master Data Controllers
+use App\Http\Controllers\MasterData\VisionController;
+
 Route::get('/', function () {
     return view('pages.index');
 })->name('index');
@@ -44,6 +47,12 @@ Route::middleware('auth')->group(function () {
             Route::get('/', function () {
                 return view('pages.dashboard.admin.index', ['meta' => ['sidebarItems' => adminSidebarItems()]]);
             })->name('index');
+            // Master Data
+            Route::prefix('master-data')->name('master-data.')->group(function () {
+                Route::resource('visions', VisionController::class)->parameters([
+                    'visions' => 'vision',
+                ]);
+            });
         });
 
         // Teacher
