@@ -7,6 +7,10 @@
     color: var(--bs-body-color);
 }
 
+.text-primary-dark {
+    color: #002155 !important;
+}
+
 .ff-host-grotesk {
     font-family: 'Host Grotesk', sans-serif !important;
 }

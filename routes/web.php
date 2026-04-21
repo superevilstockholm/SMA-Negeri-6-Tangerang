@@ -21,6 +21,10 @@ Route::get('extracurricular', function () {
     return view('pages.extracurricular');
 })->name('extracurricular');
 
+Route::get('contact-us', function () {
+    return view('pages.contact-us');
+})->name('contact-us');
+
 // Guest
 Route::middleware('guest')->group(function () {
     // Auth

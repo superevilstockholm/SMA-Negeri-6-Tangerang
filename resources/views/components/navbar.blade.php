@@ -35,9 +35,9 @@
                 </div>
                 <li class="nav-item">
                     <div class="nav-link">
-                        <a class="btn btn-sm btn-outline-light fw-semibold px-3 d-inline-flex align-items-center gap-2" href="{{ route('login_view') }}">
-                            Log In
-                            <i class="bi bi-box-arrow-in-right"></i>
+                        <a class="btn btn-sm btn-light fw-semibold px-3 d-inline-flex align-items-center gap-2 text-primary-dark contact-us-btn" href="{{ route('contact-us') }}">
+                            Contact Us
+                            <i class="bi bi-arrow-right-short"></i>
                         </a>
                     </div>
                 </li>
@@ -72,6 +72,12 @@
         }
         .dropdown-toggle::after {
             display: none;
+        }
+        .contact-us-btn i {
+            transition: all 0.2s ease-in-out;
+        }
+        .contact-us-btn:hover i {
+            transform: translateX(5px);
         }
     </style>
 @endpush
