@@ -20,6 +20,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" href="#">
                         Student Life
+                        <i class="bi bi-chevron-down fs-09"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark bg-primary-dark border-0 pt-0 pb-2 pb-lg-3 student-life-dropdown rounded-top-0">
                         <li><a class="dropdown-item px-lg-4 py-lg-2" href="{{ route('extracurricular') }}">Extracurricular</a></li>
@@ -68,6 +69,9 @@
         .nav-item .dropdown-menu .dropdown-item:hover {
             background-color: transparent;
             transform: translateX(10px);
+        }
+        .dropdown-toggle::after {
+            display: none;
         }
     </style>
 @endpush
