@@ -15,6 +15,7 @@ use App\Models\MasterData\Vision;
 // Requests
 use App\Http\Requests\MasterData\Vision\IndexRequest;
 use App\Http\Requests\MasterData\Vision\StoreRequest;
+use App\Http\Requests\MasterData\Vision\UpdateRequest;
 
 class VisionController extends Controller
 {
@@ -101,17 +102,43 @@ class VisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vision $vision)
+    public function edit(Vision $vision): View
     {
-        //
+        $allowed_max_order = vision::count();
+        return view('pages.dashboard.admin.master-data.vision.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowed_max_order' => $allowed_max_order,
+            'vision' => $vision,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vision $vision)
+    public function update(UpdateRequest $request, Vision $vision): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated, $vision) {
+            if ($validated['order'] != $vision->order) {
+                if ($validated['order'] < $vision->order) {
+                    Vision::where('order', '>=', $validated['order'])
+                        ->where('order', '<', $vision->order)
+                        ->lockForUpdate()
+                        ->increment('order');
+                } else {
+                    Vision::where('order', '>', $vision->order)
+                        ->where('order', '<=', $validated['order'])
+                        ->lockForUpdate()
+                        ->decrement('order');
+                }
+            }
+            $vision->update($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.visions.index')->with('success', 'Vision updated successfully.');
     }
 
     /**
