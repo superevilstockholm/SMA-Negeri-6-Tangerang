@@ -2,6 +2,10 @@
     font-family: 'Host Grotesk', sans-serif;
 }
 
+.swal2-container > * {
+    color: var(--bs-body-color) !important;
+}
+
 html {
     scroll-behavior: auto;
 }
@@ -12,10 +16,6 @@ html {
 
 .fs-09 {
     font-size: 0.85rem !important;
-}
-
-html[data-bs-theme="dark"] * {
-    color: var(--bs-body-color);
 }
 
 html[data-bs-theme="light"] .pc-container {

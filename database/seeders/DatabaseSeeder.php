@@ -8,6 +8,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 // Models
 use App\Models\MasterData\User;
 
+// Enums
+use App\Enums\RoleEnum;
+
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -17,11 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // First admin user
+        User::updateOrCreate([
+            'email' => config('admin.email'),
+        ], [
+            'email' => config('admin.email'),
+            'password' => config('admin.password'),
+            'role' => RoleEnum::ADMIN,
+            'email_verified_at' => now(),
         ]);
     }
 }

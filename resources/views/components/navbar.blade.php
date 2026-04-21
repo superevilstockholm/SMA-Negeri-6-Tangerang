@@ -29,7 +29,7 @@
                     </ul>
                 </li>
                 <div class="nav-item d-none d-lg-block">
-                    <div class="nav-link">
+                    <div class="nav-link d-flex align-items-center">
                         <span class="vr opacity-100"></span>
                     </div>
                 </div>

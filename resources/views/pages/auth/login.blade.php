@@ -17,13 +17,13 @@
                                 <div class="form-group mb-3">
                                     <label class="mb-2 fw-medium" for="email">Email Address</label>
                                     <div class="input-group input-group-sm">
-                                        <input class="form-control" type="text" name="email" id="email" autofocus required>
+                                        <input class="form-control" type="text" name="email" id="email" value="{{ old('email') }}" autocomplete="email" autofocus required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="mb-2 fw-medium" for="password">Password</label>
                                     <div class="input-group input-group-sm">
-                                        <input class="form-control" type="password" name="password" id="password" required>
+                                        <input class="form-control" type="password" name="password" id="password" value="{{ old('password') }}" autocomplete="current-password" required>
                                         <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
                                             <i class="bi bi-eye"></i>
                                         </span>
