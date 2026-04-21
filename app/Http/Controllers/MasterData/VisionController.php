@@ -5,13 +5,16 @@ namespace App\Http\Controllers\MasterData;
 use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\MasterData\Vision;
 
 // Requests
 use App\Http\Requests\MasterData\Vision\IndexRequest;
+use App\Http\Requests\MasterData\Vision\StoreRequest;
 
 class VisionController extends Controller
 {
@@ -54,17 +57,32 @@ class VisionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $allowed_max_order = vision::count() + 1;
+        return view('pages.dashboard.admin.master-data.vision.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowed_max_order' => $allowed_max_order,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated) {
+            Vision::where('order', '>=', $validated['order'])
+                ->lockForUpdate()
+                ->increment('order');
+            Vision::create($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.visions.index')->with('success', 'Vision created successfully.');
     }
 
     /**
