@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-12">
                     <span class="d-block text-center fs-09">
-                        Copyright &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+                        Copyright &copy; {{ date('Y') }} <b>{{ config('app.name') }}</b>. All rights reserved.
                     </span>
                 </div>
             </div>
