@@ -37,10 +37,10 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
-                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="#">Student Life</a>
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="javascript:void(0)">Student Life</a>
                             <div class="d-flex flex-column gap-1">
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#">Extracuricular</a>
+                                    <a class="nav-link" href="{{ route('extracurricular') }}">Extracurricular</a>
                                 </div>
                                 <div class="nav-item">
                                     <a class="nav-link" href="#">Recognition & Awards</a>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
-                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="#">Others</a>
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="javascript:void(0)">Others</a>
                             <div class="d-flex flex-column gap-1">
                                 <div class="nav-item">
                                     <a class="nav-link" href="#">Blog</a>
@@ -81,9 +81,9 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="text-center fs-09">
+                    <span class="d-block text-center fs-09">
                         Copyright &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
-                    </div>
+                    </span>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             transition: all 0.2s ease-in-out;
         }
         footer .nav-item:not(.social-links) .nav-link:hover {
-            transform: translateX(10px) scale(1.1);
+            transform: translateX(10px);
         }
     </style>
 @endpush

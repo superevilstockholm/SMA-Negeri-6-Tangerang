@@ -17,6 +17,16 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('teacher-and-staff') ? 'active' : '' }}" aria-current="{{ request()->routeIs('teacher-and-staff') ? 'page' : false }}" href="{{ route('teacher-and-staff') }}">Teacher & Staff</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                        Student Life
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark bg-primary-dark border-0 pt-0 pb-2 pb-lg-3 student-life-dropdown rounded-top-0">
+                        <li><a class="dropdown-item px-lg-4 py-lg-2" href="{{ route('extracurricular') }}">Extracurricular</a></li>
+                        <li><a class="dropdown-item px-lg-4 py-lg-2" href="#">Recognition & Awards</a></li>
+                        <li><a class="dropdown-item px-lg-4 py-lg-2" href="#">Stories of Impact</a></li>
+                    </ul>
+                </li>
                 <div class="nav-item d-none d-lg-block">
                     <div class="nav-link">
                         <span class="vr opacity-100"></span>
@@ -46,6 +56,19 @@
         .navbar--visible {
             transform: translateY(0);
         }
+        @media (min-width: 992px) {
+            .student-life-dropdown {
+                padding-top: 11.5px !important;
+                margin-top: 0 !important;
+            }
+        }
+        .nav-item .dropdown-menu .dropdown-item {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-item .dropdown-menu .dropdown-item:hover {
+            background-color: transparent;
+            transform: translateX(10px);
+        }
     </style>
 @endpush
 @push('js')
@@ -60,7 +83,8 @@
             ticking = true;
             requestAnimationFrame(() => {
                 const isMenuOpen = collapseEl?.classList.contains('show');
-                if (isMenuOpen) {
+                const hasOpenDropdown = document.querySelector('.navbar .dropdown-menu.show');
+                if (isMenuOpen || hasOpenDropdown) {
                     navbar.classList.remove('navbar--hidden');
                     navbar.classList.add('navbar--visible');
                     lastScrollY = window.scrollY;

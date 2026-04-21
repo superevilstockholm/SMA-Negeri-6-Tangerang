@@ -17,6 +17,10 @@ Route::get('teacher-and-staff', function () {
     return view('pages.teacher-and-staff');
 })->name('teacher-and-staff');
 
+Route::get('extracurricular', function () {
+    return view('pages.extracurricular');
+})->name('extracurricular');
+
 // Guest
 Route::middleware('guest')->group(function () {
     // Auth
