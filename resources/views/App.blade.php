@@ -21,7 +21,6 @@
     <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ asset('static/js/sweetalert2.min.js') }}" defer></script>
     <script src="{{ asset('static/js/lenis.min.js') }}" defer></script>
-    @stack('js')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const lenis = new Lenis({
@@ -36,5 +35,6 @@
             requestAnimationFrame(raf);
         });
     </script>
+    @stack('js')
 </body>
 </html>

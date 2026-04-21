@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4">
                     <div class="row">
-                        <div class="col-12 mb-3">
+                        <div class="col-12 mb-4">
                             <a class="text-decoration-none" href="{{ route('index') }}">
                                 <img class="d-block" src="{{ asset('static/img/logo-sman6tng.png') }}" alt="Logo {{ config('app.name') }}" width="60">
                             </a>
@@ -17,22 +17,22 @@
                 <div class="col-12 col-lg-6 mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
-                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="{{ route('index') }}">About</a>
+                            <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="{{ route('about') }}">About</a>
                             <div class="d-flex flex-column gap-1">
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#our-purpose">Our Purpose</a>
+                                    <a class="nav-link" href="{{ route('about') }}#our-purpose">Our Purpose</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#vision-and-mission">Vision & Mission</a>
+                                    <a class="nav-link" href="{{ route('about') }}#vision-and-mission">Vision & Mission</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#leadership">Leadership</a>
+                                    <a class="nav-link" href="{{ route('about') }}#leadership">Leadership</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#community">Community</a>
+                                    <a class="nav-link" href="{{ route('about') }}#community">Community</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="#faq">FAQ</a>
+                                    <a class="nav-link" href="{{ route('about') }}#faq">FAQ</a>
                                 </div>
                             </div>
                         </div>

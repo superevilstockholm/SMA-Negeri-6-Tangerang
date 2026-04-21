@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('pages.index');
 })->name('index');
 
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
 Route::get('teacher-and-staff', function () {
     return view('pages.teacher-and-staff');
 })->name('teacher-and-staff');

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary-dark sticky-top" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-primary-dark fixed-top sticky-lg-top" data-bs-theme="dark">
     <div class="container">
         <a class="navbar-brand fw-medium py-0" href="{{ route('index') }}">
             <img height="47" src="{{ asset('static/img/logo-sman6tng.png') }}" alt="Logo {{ config('app.name') }}">
@@ -10,6 +10,9 @@
             <ul class="navbar-nav fw-medium gap-lg-3 align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" aria-current="{{ request()->routeIs('index') ? 'page' : false }}" href="{{ route('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" aria-current="{{ request()->routeIs('about') ? 'page' : false }}" href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('teacher-and-staff') ? 'active' : '' }}" aria-current="{{ request()->routeIs('teacher-and-staff') ? 'page' : false }}" href="{{ route('teacher-and-staff') }}">Teacher & Staff</a>
@@ -49,18 +52,40 @@
     <script>
         let lastScrollY = window.scrollY;
         const navbar = document.querySelector('.navbar');
+        const collapseEl = document.querySelector('#navbarNav');
         const threshold = 6;
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 80) {
-                navbar.classList.add('navbar--hidden');
-                navbar.classList.remove('navbar--visible');
-            }
-            else if (currentScrollY < lastScrollY - threshold) {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const isMenuOpen = collapseEl?.classList.contains('show');
+                if (isMenuOpen) {
+                    navbar.classList.remove('navbar--hidden');
+                    navbar.classList.add('navbar--visible');
+                    lastScrollY = window.scrollY;
+                    ticking = false;
+                    return;
+                }
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                    navbar.classList.add('navbar--hidden');
+                    navbar.classList.remove('navbar--visible');
+                }
+                else if (currentScrollY < lastScrollY - threshold) {
+                    navbar.classList.remove('navbar--hidden');
+                    navbar.classList.add('navbar--visible');
+                }
+                lastScrollY = currentScrollY;
+                ticking = false;
+            });
+        });
+        if (collapseEl) {
+            collapseEl.addEventListener('hidden.bs.collapse', () => {
+                lastScrollY = window.scrollY;
                 navbar.classList.remove('navbar--hidden');
                 navbar.classList.add('navbar--visible');
-            }
-            lastScrollY = currentScrollY;
-        });
+            });
+        }
     </script>
 @endpush
