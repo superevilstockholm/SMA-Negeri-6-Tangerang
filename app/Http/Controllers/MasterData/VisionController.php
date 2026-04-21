@@ -144,8 +144,16 @@ class VisionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vision $vision)
+    public function destroy(Vision $vision): RedirectResponse
     {
-        //
+        DB::transaction(function () use ($vision) {
+            $deletedOrder = $vision->order;
+            $vision->delete();
+            Vision::where('order', '>', $deletedOrder)
+                ->lockForUpdate()
+                ->decrement('order');
+        });
+
+        return redirect()->route('dashboard.admin.master-data.visions.index')->with('success', 'Vision deleted successfully.');
     }
 }
