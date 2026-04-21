@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -60,7 +59,7 @@ class VisionController extends Controller
      */
     public function create(): View
     {
-        $allowed_max_order = vision::count() + 1;
+        $allowed_max_order = Vision::count() + 1;
         return view('pages.dashboard.admin.master-data.vision.create', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
@@ -104,7 +103,7 @@ class VisionController extends Controller
      */
     public function edit(Vision $vision): View
     {
-        $allowed_max_order = vision::count();
+        $allowed_max_order = Vision::count();
         return view('pages.dashboard.admin.master-data.vision.edit', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
@@ -122,6 +121,9 @@ class VisionController extends Controller
         $validated = $request->validated();
 
         DB::transaction(function () use ($validated, $vision) {
+            $vision = Vision::where('id', $vision->id)
+                ->lockForUpdate()
+                ->first();
             if ($validated['order'] != $vision->order) {
                 if ($validated['order'] < $vision->order) {
                     Vision::where('order', '>=', $validated['order'])
@@ -147,6 +149,9 @@ class VisionController extends Controller
     public function destroy(Vision $vision): RedirectResponse
     {
         DB::transaction(function () use ($vision) {
+            $vision = Vision::where('id', $vision->id)
+                ->lockForUpdate()
+                ->first();
             $deletedOrder = $vision->order;
             $vision->delete();
             Vision::where('order', '>', $deletedOrder)
