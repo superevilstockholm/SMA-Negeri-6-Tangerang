@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Visions')
+@section('title', 'Vision Management')
 @section('content')
     @php
         use Illuminate\Support\Str;
@@ -11,13 +11,13 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Visions Data</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Manage visions data.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">Vision Records</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">Manage vision records.</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('dashboard.admin.master-data.visions.create') }}"
                             class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-plus me-1"></i> Add Vision
+                            <i class="ti ti-plus me-1"></i> Create Vision
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <div class="col-12">
                                 <div class="form-floating">
                                     <input type="text" name="content" class="form-control form-control-sm"
-                                        id="filterContent" placeholder="Enter keyword" value="{{ request('content') }}">
+                                        id="filterContent" placeholder="Content" value="{{ request('content') }}">
                                     <label for="filterContent">Content</label>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="col-12 col-md-6">
                                 <a href="{{ route('dashboard.admin.master-data.visions.index') }}"
                                     class="btn btn-secondary w-100 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-rotate-clockwise-2"></i> Reset
+                                    <i class="ti ti-rotate-clockwise-2"></i> Reset Filters
                                 </a>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item"
                                                         href="{{ route('dashboard.admin.master-data.visions.show', $vision->id) }}">
-                                                        <i class="ti ti-eye me-1"></i> View
+                                                        <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
                                                     <a class="dropdown-item"
                                                         href="{{ route('dashboard.admin.master-data.visions.edit', $vision->id) }}">
@@ -154,7 +154,7 @@
                                     <tr>
                                         <td colspan="4" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
-                                                No visions found with the current filters.
+                                                No vision records found for the selected filters.
                                             </div>
                                         </td>
                                     </tr>
@@ -182,14 +182,14 @@
                     const visionId = this.getAttribute('data-id');
                     const visionContent = this.getAttribute('data-content');
                     Swal.fire({
-                        title: "Delete Vision?",
-                        text: "Are you sure you want to delete \"" + visionContent +
+                        title: "Delete Vision",
+                        text: "Are you sure you want to delete the following vision: \"" + visionContent +
                             "\"? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#d33",
                         cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Yes, delete",
+                        confirmButtonText: "Yes, Delete",
                         cancelButtonText: "Cancel"
                     }).then((result) => {
                         if (result.isConfirmed) {

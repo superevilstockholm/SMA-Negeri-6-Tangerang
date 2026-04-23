@@ -8,12 +8,12 @@
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
                         <h3 class="p-0 m-0 mb-1 fw-semibold">Create Vision</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Create a new user account.</p>
+                        <p class="p-0 m-0 fw-medium text-muted">Create a new vision.</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('dashboard.admin.master-data.visions.index') }}"
                             class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-arrow-left me-1"></i> Back
+                            <i class="ti ti-arrow-left me-1"></i> Back to List
                         </a>
                     </div>
                 </div>
@@ -24,14 +24,13 @@
         <div class="col">
             <div class="card my-0">
                 <div class="card-body">
-                    <form action="{{ route('dashboard.admin.master-data.visions.store') }}" autocomplete="off" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.admin.master-data.visions.store') }}" autocomplete="off"
+                        method="POST">
                         @csrf
                         <div class="form-floating mb-3">
-                            <textarea type="content" name="content" class="form-control @error('content') is-invalid @enderror"
-                                id="floatingInputContent" placeholder="Vision Content" value="{{ old('content') }}"
-                                autocomplete="off" required></textarea>
-                            <label for="floatingInputContent">Vision Content</label>
+                            <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="floatingInputContent"
+                                placeholder="Content" autocomplete="off" autofocus required>{{ old('content') }}</textarea>
+                            <label for="floatingInputContent">Content</label>
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -39,21 +38,21 @@
                         <div class="form-floating mb-3">
                             <select name="order" id="floatingInputOrder"
                                 class="form-select @error('order') is-invalid @enderror" required>
-                                <option value="" disabled selected>Choose Order</option>
+                                <option value="" disabled {{ old('order') ? '' : 'selected' }}>Select order</option>
                                 @for ($i = 1; $i <= $allowedMaxOrder; $i++)
                                     <option value="{{ $i }}" {{ old('order') == $i ? 'selected' : '' }}>
                                         {{ $i }}
                                     </option>
                                 @endfor
                             </select>
-                            <label for="floatingInputOrder">Vision Order</label>
+                            <label for="floatingInputOrder">Display Order</label>
                             @error('order')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary px-4 rounded-pill">
-                                <i class="ti ti-device-floppy me-1"></i> Save
+                                <i class="ti ti-device-floppy me-1"></i> Save Vision
                             </button>
                         </div>
                     </form>
