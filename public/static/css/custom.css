@@ -2,6 +2,13 @@
     font-family: 'Host Grotesk', sans-serif;
 }
 
+html[data-bs-theme="dark"] .pc-container *,
+html[data-bs-theme="dark"] .pc-sidebar *,
+html[data-bs-theme="dark"] .pc-header *,
+html[data-bs-theme="dark"] .pc-footer * {
+    color: var(--bs-body-color);
+}
+
 .swal2-container > * {
     color: var(--bs-body-color) !important;
 }
@@ -38,7 +45,8 @@ html[data-bs-theme="dark"] .dropdown > .dropdown-menu {
 .dropdown .dropdown-item.active,
 .dropdown .dropdown-item:active,
 .dropdown .dropdown-item:focus,
-.dropdown .dropdown-item:hover {
+.dropdown .dropdown-item:hover,
+.dropdown-menu.dropdown-menu-end.show .dropdown-item:hover {
     color: var(--bs-body-color);
     background-color: rgba(var(--bs-body-color-rgb), 0.1) !important;
 }
@@ -233,4 +241,8 @@ html[data-bs-theme="dark"] .modal-footer {
 
 .text-primary-dark {
     color: #002155 !important;
+}
+
+.table-responsive {
+    overflow: visible !important;
 }

@@ -11,6 +11,7 @@
     @endif
 @endsection
 @push('css')
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('static/css/bootstrap-icons.min.css') }}">
     <style>
         @media (max-width: 992px) {

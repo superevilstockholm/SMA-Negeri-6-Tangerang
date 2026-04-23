@@ -22,12 +22,12 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'limit' => ['sometimes', 'integer', 'min:1', 'max:100'],
-            'content' => ['sometimes', 'string'],
-            'start_order' => ['sometimes', 'integer'],
-            'end_order' => ['sometimes', 'integer', 'gte:start_order'],
-            'start_date' => ['sometimes', 'date'],
-            'end_date' => ['sometimes', 'date', 'after_or_equal:start_date'],
+            'limit' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
+            'content' => ['sometimes', 'nullable', 'string'],
+            'start_order' => ['sometimes', 'nullable', 'integer'],
+            'end_order' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
+            'start_date' => ['sometimes', 'nullable', 'date'],
+            'end_date' => ['sometimes', 'nullable', 'date', 'after_or_equal:start_date'],
         ];
     }
 }

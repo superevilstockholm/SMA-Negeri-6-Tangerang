@@ -26,7 +26,7 @@ class VisionController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Vision::query();
+        $query = Vision::query()->orderBy('order', 'asc');
 
         if (isset($validated['content'])) {
             $query->where('content', 'ILIKE', '%' . $validated['content'] . '%');
@@ -59,12 +59,12 @@ class VisionController extends Controller
      */
     public function create(): View
     {
-        $allowed_max_order = Vision::count() + 1;
+        $allowedMaxOrder = Vision::count() + 1;
         return view('pages.dashboard.admin.master-data.vision.create', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'allowed_max_order' => $allowed_max_order,
+            'allowedMaxOrder' => $allowedMaxOrder,
         ]);
     }
 
@@ -103,12 +103,12 @@ class VisionController extends Controller
      */
     public function edit(Vision $vision): View
     {
-        $allowed_max_order = Vision::count();
+        $allowedMaxOrder = Vision::count();
         return view('pages.dashboard.admin.master-data.vision.edit', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'allowed_max_order' => $allowed_max_order,
+            'allowedMaxOrder' => $allowedMaxOrder,
             'vision' => $vision,
         ]);
     }

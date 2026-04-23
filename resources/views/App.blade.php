@@ -28,7 +28,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('static/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('static/css/custom.css') }}">
     @stack('css')
 </head>
