@@ -2,6 +2,13 @@
     font-family: 'Host Grotesk', sans-serif;
 }
 
+html[data-bs-theme="dark"] .pc-container *,
+html[data-bs-theme="dark"] .pc-sidebar *,
+html[data-bs-theme="dark"] .pc-header *,
+html[data-bs-theme="dark"] .pc-footer * {
+    color: var(--bs-body-color) !important;
+}
+
 .swal2-container > * {
     color: var(--bs-body-color) !important;
 }
@@ -233,4 +240,8 @@ html[data-bs-theme="dark"] .modal-footer {
 
 .text-primary-dark {
     color: #002155 !important;
+}
+
+.table-responsive {
+    overflow: visible !important;
 }
