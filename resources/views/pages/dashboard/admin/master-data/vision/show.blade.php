@@ -13,7 +13,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('dashboard.admin.master-data.visions.index') }}"
-                            class="btn btn-sm btn-primary px-4 rounded-pill m-0">
+                            class="btn btn-sm btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill m-0">
                             <i class="ti ti-arrow-left me-1"></i> Back to List
                         </a>
                     </div>
@@ -51,15 +51,15 @@
                 <div class="card-body">
                     <h4 class="card-title fw-semibold mb-3">Quick Actions</h4>
                     <a href="{{ route('dashboard.admin.master-data.visions.edit', $vision->id) }}"
-                        class="btn btn-warning w-100 mb-2">
+                        class="btn btn-warning d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
                         <i class="ti ti-pencil me-1"></i> Edit Vision
                     </a>
                     <form id="form-delete-{{ $vision->id }}"
                         action="{{ route('dashboard.admin.master-data.visions.destroy', $vision->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger w-100 btn-delete" data-id="{{ $vision->id }}"
-                            data-content="{{ $vision->content }}">
+                        <button type="button" class="btn btn-danger d-flex align-items-center gap-2 justify-content-center w-100 btn-delete" data-id="{{ $vision->id }}"
+                            data-content="{{ $vision->content ? Str::limit($vision->content, 50) : '-' }}">
                             <i class="ti ti-trash me-1"></i> Delete Vision
                         </button>
                     </form>

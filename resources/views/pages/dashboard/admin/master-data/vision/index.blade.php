@@ -85,14 +85,14 @@
                             {{-- Search Buttons --}}
                             <div class="col-12 col-md-6">
                                 <button type="submit"
-                                    class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+                                    class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
                                     <i class="ti ti-search"></i> Search
                                 </button>
                             </div>
                             {{-- Reset Buttons --}}
                             <div class="col-12 col-md-6">
                                 <a href="{{ route('dashboard.admin.master-data.visions.index') }}"
-                                    class="btn btn-secondary w-100 d-flex align-items-center justify-content-center">
+                                    class="btn btn-secondary w-100 d-flex align-items-center justify-content-center gap-2">
                                     <i class="ti ti-rotate-clockwise-2"></i> Reset Filters
                                 </a>
                             </div>
@@ -127,11 +127,11 @@
                                                     <i class="ti ti-dots-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item"
+                                                    <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.visions.show', $vision->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
-                                                    <a class="dropdown-item"
+                                                    <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.visions.edit', $vision->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
                                                     </a>
@@ -140,9 +140,9 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="dropdown-item text-danger btn-delete"
+                                                        <button type="button" class="dropdown-item d-flex align-items-center gap-2 text-danger btn-delete"
                                                             data-id="{{ $vision->id }}"
-                                                            data-content="{{ $vision->content }}">
+                                                            data-content="{{ $vision->content ? Str::limit($vision->content, 50) : '-' }}">
                                                             <i class="ti ti-trash me-1 text-danger"></i> Delete
                                                         </button>
                                                     </form>

@@ -12,7 +12,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('dashboard.admin.master-data.visions.index') }}"
-                            class="btn btn-sm btn-primary px-4 rounded-pill m-0">
+                            class="btn btn-sm btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill m-0">
                             <i class="ti ti-arrow-left me-1"></i> Back to List
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary px-4 rounded-pill">
+                            <button type="submit" class="btn btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill">
                                 <i class="ti ti-device-floppy me-1"></i> Update Vision
                             </button>
                         </div>
