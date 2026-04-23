@@ -22,7 +22,7 @@
                         Student Life
                         <i class="bi bi-chevron-down fs-09"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark border-0 pt-0 pb-2 pb-lg-3 student-life-dropdown rounded-top-0" style="background-color: #002155 !important; border: 0 !important;">
+                    <ul class="dropdown-menu dropdown-menu-dark border-0 pt-0 pb-2 pb-lg-3 rounded-top-0 student-life-dropdown" style="background-color: #002155 !important; border: 0 !important;">
                         <li><a class="dropdown-item px-lg-4 py-lg-2" href="{{ route('extracurricular') }}">Extracurricular</a></li>
                         <li><a class="dropdown-item px-lg-4 py-lg-2" href="#">Recognition & Awards</a></li>
                         <li><a class="dropdown-item px-lg-4 py-lg-2" href="#">Stories of Impact</a></li>
@@ -51,32 +51,32 @@
             transition: transform 0.3s ease, opacity 0.2s ease;
             will-change: transform;
         }
-        .navbar--hidden {
+        .navbar.navbar--hidden {
             transform: translateY(-100%);
         }
-        .navbar--visible {
+        .navbar.navbar--visible {
             transform: translateY(0);
         }
         @media (min-width: 992px) {
-            .student-life-dropdown {
+            .navbar .student-life-dropdown {
                 padding-top: 11.5px !important;
                 margin-top: 0 !important;
             }
         }
-        .nav-item .dropdown-menu .dropdown-item {
+        .navbar .nav-item .dropdown-menu .dropdown-item {
             transition: all 0.2s ease-in-out;
         }
-        .nav-item .dropdown-menu .dropdown-item:hover {
+        .navbar .nav-item .dropdown-menu .dropdown-item:hover {
             transform: translateX(10px);
             background-color: transparent !important;
         }
-        .dropdown-toggle::after {
-            display: none;
+        .navbar .dropdown-toggle::after {
+            display: none !important;
         }
-        .contact-us-btn i {
+        .navbar .contact-us-btn i {
             transition: all 0.2s ease-in-out;
         }
-        .contact-us-btn:hover i {
+        .navbar .contact-us-btn:hover i {
             transform: translateX(5px);
         }
     </style>
