@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
                 Route::resource('missions', MissionController::class)->parameters([
                     'missions' => 'mission',
                 ]);
+                Route::resource('contacts', ContactController::class)->parameters([
+                    'contacts' => 'contact',
+                ])->except(['edit', 'update']);
             });
         });
 
