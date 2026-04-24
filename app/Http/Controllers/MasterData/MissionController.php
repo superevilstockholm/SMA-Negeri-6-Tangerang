@@ -4,9 +4,9 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\MasterData\Mission;
@@ -14,7 +14,7 @@ use App\Models\MasterData\Mission;
 // Requests
 use App\Http\Requests\MasterData\Mission\IndexRequest;
 use App\Http\Requests\MasterData\Mission\StoreRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\MasterData\Mission\UpdateRequest;
 
 class MissionController extends Controller
 {
@@ -101,17 +101,46 @@ class MissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mission $mission)
+    public function edit(Mission $mission): View
     {
-        //
+        $allowedMaxOrder = Mission::count();
+        return view('pages.dashboard.admin.master-data.mission.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowedMaxOrder' => $allowedMaxOrder,
+            'mission' => $mission,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mission $mission)
+    public function update(UpdateRequest $request, Mission $mission): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated, $mission) {
+            $mission = Mission::where('id', $mission->id)
+                ->lockForUpdate()
+                ->first();
+            if ($validated['order'] != $mission->order) {
+                if ($validated['order'] < $mission->order) {
+                    Mission::where('order', '>=', $validated['order'])
+                        ->where('order', '<', $mission->order)
+                        ->lockForUpdate()
+                        ->increment('order');
+                } else {
+                    Mission::where('order', '>', $mission->order)
+                        ->where('order', '<=', $validated['order'])
+                        ->lockForUpdate()
+                        ->decrement('order');
+                }
+            }
+            $mission->update($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.missions.index')->with('success', 'Mission updated successfully.');
     }
 
     /**
