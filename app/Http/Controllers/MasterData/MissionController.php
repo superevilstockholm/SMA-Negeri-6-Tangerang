@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MasterData;
 use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 // Models
@@ -12,6 +13,8 @@ use App\Models\MasterData\Mission;
 
 // Requests
 use App\Http\Requests\MasterData\Mission\IndexRequest;
+use App\Http\Requests\MasterData\Mission\StoreRequest;
+use Illuminate\Http\RedirectResponse;
 
 class MissionController extends Controller
 {
@@ -54,17 +57,32 @@ class MissionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $allowedMaxOrder = Mission::count() + 1;
+        return view('pages.dashboard.admin.master-data.mission.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowedMaxOrder' => $allowedMaxOrder,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated) {
+            Mission::where('order', '>=', $validated['order'])
+                ->lockForUpdate()
+                ->increment('order');
+            Mission::create($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.missions.index')->with('success', 'Mission created successfully.');
     }
 
     /**
