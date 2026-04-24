@@ -31,17 +31,17 @@ class MissionController extends Controller
         if (isset($validated['content'])) {
             $query->where('content', 'ILIKE', '%' . $validated['content'] . '%');
         }
-        if (isset($validated['start_order'])) {
-            $query->where('order', '>=', $validated['start_order']);
+        if (isset($validated['startOrder'])) {
+            $query->where('order', '>=', $validated['startOrder']);
         }
-        if (isset($validated['end_order'])) {
-            $query->where('order', '<=', $validated['end_order']);
+        if (isset($validated['endOrder'])) {
+            $query->where('order', '<=', $validated['endOrder']);
         }
-        if (isset($validated['start_date'])) {
-            $query->where('created_at', '>=', Carbon::parse($validated['start_date'])->startOfDay());
+        if (isset($validated['startDate'])) {
+            $query->where('created_at', '>=', Carbon::parse($validated['startDate'])->startOfDay());
         }
-        if (isset($validated['end_date'])) {
-            $query->where('created_at', '<=', Carbon::parse($validated['end_date'])->endOfDay());
+        if (isset($validated['endDate'])) {
+            $query->where('created_at', '<=', Carbon::parse($validated['endDate'])->endOfDay());
         }
 
         $missions = $query->paginate($limit)->appends($request->except('page'));

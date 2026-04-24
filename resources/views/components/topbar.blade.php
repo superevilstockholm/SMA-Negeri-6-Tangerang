@@ -95,7 +95,7 @@
                                     <i class="ti" id="theme-icon"></i>
                                     <span>Theme</span>
                                 </a>
-                                <form id="logout-form" action="{{ route('logout_attempt') }}" method="POST">
+                                <form id="logout-form" action="{{ route('logout-attempt') }}" method="POST">
                                     @csrf
                                     <button id="logout-button" type="submit" class="dropdown-item text-body">
                                         <i class="ti ti-logout"></i>

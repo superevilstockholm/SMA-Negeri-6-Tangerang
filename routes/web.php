@@ -32,14 +32,14 @@ Route::get('contact-us', function () {
 // Guest
 Route::middleware('guest')->group(function () {
     // Auth
-    Route::get('/login', [AuthController::class, 'login_view'])->name('login_view');
-    Route::post('/login', [AuthController::class, 'login_attempt'])->name('login_attempt');
+    Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+    Route::post('/login', [AuthController::class, 'loginAttempt'])->name('login-attempt');
 });
 
 // Protected
 Route::middleware('auth')->group(function () {
     // Auth
-    Route::post('/logout', [AuthController::class, 'logout_attempt'])->name('logout_attempt');
+    Route::post('/logout', [AuthController::class, 'logoutAttempt'])->name('logout-attempt');
 
     // Dashboard
     Route::prefix('/dashboard')->name('dashboard.')->group(function () {

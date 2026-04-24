@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <h1 class="h3 text-center fw-semibold mb-0">WELCOME BACK</h1>
                             <p class="text-muted text-center fw-medium">Login to your account to access your dashboard!</p>
-                            <form class="p-0 m-0" action="{{ route('login_attempt') }}" method="POST">
+                            <form class="p-0 m-0" action="{{ route('login-attempt') }}" method="POST">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label class="mb-2 fw-medium" for="email">Email Address</label>

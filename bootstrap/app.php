@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectGuestsTo(fn () => route('login_view'));
+        $middleware->redirectGuestsTo(fn () => route('login-view'));
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'guest' => GuestMiddleware::class
