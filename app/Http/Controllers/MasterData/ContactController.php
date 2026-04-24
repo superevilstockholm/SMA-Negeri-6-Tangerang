@@ -62,12 +62,9 @@ class ContactController extends Controller
 
     public function contactUsAttempt(AttemptRequest $request): RedirectResponse
     {
-        Contact::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'content' => $request->content,
-        ]);
+        $validated = $request->validated();
+
+        Contact::create($validated);
 
         return redirect()->route('contact-us-view')->with('success', 'Your message has been sent!');
     }
