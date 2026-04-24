@@ -1,3 +1,8 @@
+html[data-bs-theme="dark"] {
+    --bs-body-bg: #181818;
+    --bs-body-bg-rgb: 24, 24, 24;
+}
+
 * {
     font-family: 'Host Grotesk', sans-serif;
 }
@@ -65,7 +70,7 @@ html[data-bs-theme="dark"] html,
 html[data-bs-theme="dark"] body,
 html[data-bs-theme="dark"] .pc-sidebar,
 html[data-bs-theme="dark"] .pc-header {
-    background-color: rgb(24, 24, 24) !important;
+    background-color: rgb(var(--bs-body-bg-rgb)) !important;
 }
 
 html[data-bs-theme="dark"] .dropdown-menu.dropdown-user-profile.dropdown-menu-end,
@@ -76,7 +81,7 @@ html[data-bs-theme="dark"] .dropdown-menu.dropdown-notification.dropdown-menu-en
 }
 
 html[data-bs-theme="dark"] .card {
-    background-color: rgb(24, 24, 24) !important;
+    background-color: rgb(var(--bs-body-bg-rgb)) !important;
 }
 
 html[data-bs-theme="dark"] .form-control, html[data-bs-theme="dark"] .form-select, html[data-bs-theme="dark"] .form-check-input {
@@ -195,7 +200,7 @@ input:-webkit-autofill:active {
 }
 
 html[data-bs-theme="dark"] .modal-content {
-    background-color: rgb(24, 24, 24) !important;
+    background-color: rgb(var(--bs-body-bg-rgb)) !important;
 }
 html[data-bs-theme="dark"] .modal-header {
     border-bottom-color: rgb(33, 33, 33) !important;
