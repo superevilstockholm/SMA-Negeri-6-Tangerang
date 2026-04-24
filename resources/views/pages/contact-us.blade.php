@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Contact Us')
 @section('content')
-    <section class="mb-4">
+    <section class="mb-4 mb-lg-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col px-0 position-relative">
@@ -9,13 +9,55 @@
                         src="{{ asset('static/img/contact-us-header-image.jpg') }}" alt="Contact Us Header Image">
                     <div
                         class="position-absolute z-1 w-100 h-100 d-flex align-items-center justify-content-center top-0 start-0 bg-dark bg-opacity-50">
-                        <h1 class="p-0 m-0 text-white fw-semibold">Contact Us</h1>
+                        <h1 class="p-0 m-0 text-white fw-semibold display-4">Contact Us</h1>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="mb-4">
+    <section class="mb-4 mb-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-6 fw-medium mb-0 d-flex align-items-center text-primary">
+                        <span class="bg-primary d-block me-3 me-lg-4"
+                            style="width: 23px; height: 23px; transform: rotate(45deg);"></span>
+                        Let Us Assist You
+                    </h1>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <form autocomplete="off" class="p-0 m-0" action="{{ route('contact-us-attempt') }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label for="name" class="form-label fw-medium mb-0">Full Name <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                                id="name" name="name" value="{{ old('name') }}" autocomplete="off" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label fw-medium mb-0">Email Address <span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                                id="email" name="email" value="{{ old('email') }}" autocomplete="off" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="phone" class="form-label fw-medium mb-0">Phone</label>
+                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                                id="phone" name="phone" value="{{ old('phone') }}" autocomplete="off">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="message" class="form-label fw-medium mb-0">Message <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control form-control-sm border-0 border-bottom rounded-0" id="message" name="message"
+                                autocomplete="off" required>{{ old('message') }}</textarea>
+                        </div>
+                        <button class="btn btn-sm btn-primary w-100" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mb-4 mb-lg-5">
         <div class="container">
             <div class="row">
                 <div class="col" style="height: 450px;">
@@ -27,3 +69,15 @@
         </div>
     </section>
 @endsection
+@push('css')
+    <style>
+        input,
+        input:hover,
+        input:focus,
+        input:active {
+            -webkit-box-shadow: 0 0 0 0 transparent inset !important;
+            box-shadow: 0 0 0 0 transparent inset !important;
+            color: var(--bs-body-color) !important;
+        }
+    </style>
+@endpush
