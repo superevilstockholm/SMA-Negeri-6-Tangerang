@@ -88,9 +88,14 @@ class MissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mission $mission)
+    public function show(Mission $mission): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.mission.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'mission' => $mission,
+        ]);
     }
 
     /**
