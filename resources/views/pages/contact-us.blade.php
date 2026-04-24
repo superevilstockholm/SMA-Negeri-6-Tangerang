@@ -1,21 +1,33 @@
 @extends('layouts.base')
 @section('title', 'Contact Us')
 @section('content')
-    <section class="mb-4 mb-lg-5">
+    <section class="position-relative">
         <div class="container-fluid">
             <div class="row">
                 <div class="col px-0 position-relative">
-                    <img class="w-100 h-100 object-fit-cover" style="max-height: 350px;"
+                    <img class="w-100 h-100 object-fit-cover" style="max-height: 380px;"
                         src="{{ asset('static/img/contact-us-header-image.jpg') }}" alt="Contact Us Header Image">
                     <div
-                        class="position-absolute z-1 w-100 h-100 d-flex align-items-center justify-content-center top-0 start-0 bg-dark bg-opacity-50">
+                        class="position-absolute z-1 w-100 h-100 d-flex align-items-center justify-content-center top-0 start-0 bg-dark bg-opacity-50" style="padding-bottom: 60px;">
                         <h1 class="p-0 m-0 text-white fw-semibold display-4">Contact Us</h1>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="position-absolute z-2 w-100 top-100 start-0" style="transform: translateY(-100%);">
+            <div class="d-flex align-items-start">
+                <div class="bg-body flex-grow-1" style="height: 30px;"></div>
+                <div class="container d-flex p-0" style="flex: 0 0 auto; width: 100%;">
+                    <div class="bg-body" style="flex: 2; height: 30px;"></div>
+                    <div class="bg-body" style="width: 30px; height: 30px; border-top-right-radius: 100%;"></div>
+                    <div class="bg-body" style="width: 30px; height: 30px; border-top-left-radius: 100%;"></div>
+                    <div class="bg-body" style="flex: 1; height: 30px;"></div>
+                </div>
+                <div class="bg-body flex-grow-1" style="height: 30px;"></div>
+            </div>
+        </div>
     </section>
-    <section class="mb-4 mb-lg-5">
+    <section class="position-relative" style="padding-bottom: 90px; padding-top: 60px;">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0">
@@ -43,7 +55,7 @@
                         <div class="form-group mb-3">
                             <label for="phone" class="form-label fw-medium mb-0">Phone</label>
                             <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
-                                id="phone" name="phone" value="{{ old('phone') }}" autocomplete="off">
+                                id="phone" name="phone" value="{{ old('phone') }}" placeholder="+62" autocomplete="off">
                         </div>
                         <div class="form-group mb-3">
                             <label for="message" class="form-label fw-medium mb-0">Message <span
@@ -56,14 +68,65 @@
                 </div>
             </div>
         </div>
+        <div class="position-absolute z-2 w-100 top-100 start-0" style="transform: translateY(-100%);">
+            <div class="d-flex align-items-start">
+                <div class="bg-primary-dark flex-grow-1" style="height: 30px;"></div>
+                <div class="container d-flex p-0" style="flex: 0 0 auto; width: 100%;">
+                    <div class="bg-primary-dark" style="flex: 2; height: 30px;"></div>
+                    <div class="bg-primary-dark" style="width: 30px; height: 30px; border-top-right-radius: 100%;"></div>
+                    <div class="bg-primary-dark" style="width: 30px; height: 30px; border-top-left-radius: 100%;"></div>
+                    <div class="bg-primary-dark" style="flex: 1; height: 30px;"></div>
+                </div>
+                <div class="bg-primary-dark flex-grow-1" style="height: 30px;"></div>
+            </div>
+        </div>
     </section>
-    <section class="mb-4 mb-lg-5">
+    <section class="position-relative bg-primary-dark" style="padding-bottom: 90px; padding-top: 60px;">
         <div class="container">
             <div class="row">
                 <div class="col" style="height: 450px;">
                     <iframe class="w-100 h-100 border-0 rounded-3"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d626.2898128900872!2d106.64528558440489!3d-6.161056796023141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8b8b5a2c581%3A0x953db60512db4685!2sSMAN%206%20TANGERANG!5e1!3m2!1sid!2sid!4v1777038122431!5m2!1sid!2sid"
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute z-2 w-100 top-100 start-0" style="transform: translateY(-100%);">
+            <div class="d-flex align-items-start">
+                <div class="bg-body flex-grow-1" style="height: 30px;"></div>
+                <div class="container d-flex p-0" style="flex: 0 0 auto; width: 100%;">
+                    <div class="bg-body" style="flex: 2; height: 30px;"></div>
+                    <div class="bg-body" style="width: 30px; height: 30px; border-top-right-radius: 100%;"></div>
+                    <div class="bg-body" style="width: 30px; height: 30px; border-top-left-radius: 100%;"></div>
+                    <div class="bg-body" style="flex: 1; height: 30px;"></div>
+                </div>
+                <div class="bg-body flex-grow-1" style="height: 30px;"></div>
+            </div>
+        </div>
+    </section>
+    <section style="padding-bottom: 60px; padding-top: 60px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                    <i class="bi bi-envelope fs-1 py-0 my-0"></i>
+                    <div class="d-flex flex-column ms-3">
+                        <h5 class="mb-0 fw-semibold">Email</h5>
+                        <p class="mb-0 fw-medium text-muted">sman6tangerangkota@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                    <i class="bi bi-phone fs-1 py-0 my-0"></i>
+                    <div class="d-flex flex-column ms-3">
+                        <h5 class="mb-0 fw-semibold">Phone</h5>
+                        <p class="mb-0 fw-medium text-muted">(021) 5587229</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                    <i class="bi bi-geo-alt fs-1 py-0 my-0"></i>
+                    <div class="d-flex flex-column ms-3">
+                        <h5 class="mb-0 fw-semibold">Address</h5>
+                        <p class="mb-0 fw-medium text-muted">Jln. Nyimas Melati No. 2, Kel. Karanganyar, Kec. Neglasari, Kota Tangerang, Prov Banten, 15121, Indonesia</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,5 +151,42 @@
         html[data-bs-theme="dark"] .border-bottom {
             border-bottom: 1px solid rgba(var(--bs-body-color-rgb), 0.1) !important;
         }
+        .contact-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .contact-reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .contact-reveal i {
+            transition: transform 0.3s ease;
+        }
+        .contact-reveal:hover i {
+            transform: scale(1.1);
+            color: var(--bs-primary);
+        }
     </style>
+@endpush
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactReveals = document.querySelectorAll('.contact-reveal');
+            const contactObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(contactReveals).indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 150);
+                        contactObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+            contactReveals.forEach(el => contactObserver.observe(el));
+        });
+    </script>
 @endpush
