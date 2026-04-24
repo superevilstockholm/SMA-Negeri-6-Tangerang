@@ -27,7 +27,7 @@ class IndexRequest extends FormRequest
             'startOrder' => ['sometimes', 'nullable', 'integer'],
             'endOrder' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
             'startDate' => ['sometimes', 'nullable', 'date'],
-            'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:start_date'],
+            'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:startDate'],
         ];
     }
 }

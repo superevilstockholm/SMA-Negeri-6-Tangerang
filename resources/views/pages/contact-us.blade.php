@@ -31,24 +31,24 @@
                         <div class="form-group mb-3">
                             <label for="name" class="form-label fw-medium mb-0">Full Name <span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="name" name="name" value="{{ old('name') }}" autocomplete="off" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="email" class="form-label fw-medium mb-0">Email Address <span
                                     class="text-danger">*</span></label>
-                            <input type="email" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                            <input type="email" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="email" name="email" value="{{ old('email') }}" autocomplete="off" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="phone" class="form-label fw-medium mb-0">Phone</label>
-                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0"
+                            <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="phone" name="phone" value="{{ old('phone') }}" autocomplete="off">
                         </div>
                         <div class="form-group mb-3">
                             <label for="message" class="form-label fw-medium mb-0">Message <span
                                     class="text-danger">*</span></label>
-                            <textarea class="form-control form-control-sm border-0 border-bottom rounded-0" id="message" name="message"
+                            <textarea class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent" id="message" name="message"
                                 autocomplete="off" required>{{ old('message') }}</textarea>
                         </div>
                         <button class="btn btn-sm btn-primary w-100" type="submit">Submit</button>
@@ -78,6 +78,15 @@
             -webkit-box-shadow: 0 0 0 0 transparent inset !important;
             box-shadow: 0 0 0 0 transparent inset !important;
             color: var(--bs-body-color) !important;
+        }
+        html[data-bs-theme="dark"] .border-0 {
+            border: none !important;
+        }
+        html[data-bs-theme="dark"] .bg-transparent {
+            background-color: transparent !important;
+        }
+        html[data-bs-theme="dark"] .border-bottom {
+            border-bottom: 1px solid rgba(var(--bs-body-color-rgb), 0.1) !important;
         }
     </style>
 @endpush
