@@ -63,7 +63,7 @@
                                     <a class="nav-link" href="#">Events</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                                    <a class="nav-link" href="{{ route('contact-us-view') }}">Contact Us</a>
                                 </div>
                                 <div class="nav-item d-flex align-items-center gap-3 social-links">
                                     <a class="nav-link" href="https://www.instagram.com/sman6tangerang/" target="_blank">
@@ -110,22 +110,22 @@
 @endpush
 @push('js')
     <script>
-        const reveals = document.querySelectorAll('footer .reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const index = [...reveals].indexOf(entry.target);
-
-                    setTimeout(() => {
-                        entry.target.classList.add('show');
-                    }, index * 80);
-
-                    observer.unobserve(entry.target);
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('footer .reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = [...reveals].indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 80);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
             });
-        }, {
-            threshold: 0.15
+            reveals.forEach(el => observer.observe(el));
         });
-        reveals.forEach(el => observer.observe(el));
     </script>
 @endpush

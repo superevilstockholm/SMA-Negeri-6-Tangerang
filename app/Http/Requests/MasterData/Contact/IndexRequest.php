@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\MasterData\Vision;
+namespace App\Http\Requests\MasterData\Contact;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,9 +23,10 @@ class IndexRequest extends FormRequest
     {
         return [
             'limit' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
-            'content' => ['sometimes', 'nullable', 'string'],
-            'startOrder' => ['sometimes', 'nullable', 'integer'],
-            'endOrder' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
+            'name' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'email' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'phone' => ['sometimes', 'nullable', 'string', 'max:20'],
+            'message' => ['sometimes', 'nullable', 'string'],
             'startDate' => ['sometimes', 'nullable', 'date'],
             'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:startDate'],
         ];
