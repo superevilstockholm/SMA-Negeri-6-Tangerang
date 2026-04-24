@@ -9,6 +9,7 @@ if (!function_exists('adminSidebarItems')) {
             ],
             'master data' => [
                 ['label' => 'visions', 'icon' => 'ti ti-focus-2', 'route' => 'dashboard.admin.master-data.visions.index', 'active_pattern' => 'dashboard.admin.master-data.visions.*'],
+                ['label' => 'mission', 'icon' => 'ti ti-target', 'route' => 'dashboard.admin.master-data.missions.index', 'active_pattern' => 'dashboard.admin.master-data.missions.*'],
             ]
         ];
     }

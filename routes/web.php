@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 
 // Master Data Controllers
 use App\Http\Controllers\MasterData\VisionController;
+use App\Http\Controllers\MasterData\MissionController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -51,6 +52,9 @@ Route::middleware('auth')->group(function () {
             Route::prefix('master-data')->name('master-data.')->group(function () {
                 Route::resource('visions', VisionController::class)->parameters([
                     'visions' => 'vision',
+                ]);
+                Route::resource('missions', MissionController::class)->parameters([
+                    'missions' => 'mission',
                 ]);
             });
         });
