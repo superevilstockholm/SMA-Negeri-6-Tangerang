@@ -146,8 +146,19 @@ class MissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mission $mission)
+    public function destroy(Mission $mission): RedirectResponse
     {
-        //
+        DB::transaction(function () use ($mission) {
+            $mission = Mission::where('id', $mission->id)
+                ->lockForUpdate()
+                ->first();
+            $deletedOrder = $mission->order;
+            $mission->delete();
+            Mission::where('order', '>', $deletedOrder)
+                ->lockForUpdate()
+                ->decrement('order');
+        });
+
+        return redirect()->route('dashboard.admin.master-data.missions.index')->with('success', 'Mission deleted successfully.');
     }
 }
