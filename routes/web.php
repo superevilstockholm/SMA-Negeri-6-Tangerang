@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 // Master Data Controllers
 use App\Http\Controllers\MasterData\VisionController;
 use App\Http\Controllers\MasterData\MissionController;
+use App\Http\Controllers\MasterData\ContactController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -25,9 +26,8 @@ Route::get('extracurricular', function () {
     return view('pages.extracurricular');
 })->name('extracurricular');
 
-Route::get('contact-us', function () {
-    return view('pages.contact-us');
-})->name('contact-us');
+Route::get('contact-us', [ContactController::class, 'contactUsView'])->name('contact-us-view');
+Route::post('contact-us', [ContactController::class, 'contactUsAttempt'])->name('contact-us-attempt');
 
 // Guest
 Route::middleware('guest')->group(function () {

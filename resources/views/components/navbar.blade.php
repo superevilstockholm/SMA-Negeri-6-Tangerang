@@ -35,7 +35,7 @@
                 </div>
                 <li class="nav-item">
                     <div class="nav-link">
-                        <a class="btn btn-sm btn-light fw-semibold px-3 d-inline-flex align-items-center gap-2 text-primary-dark contact-us-btn" href="{{ route('contact-us') }}">
+                        <a class="btn btn-sm btn-light fw-semibold px-3 d-inline-flex align-items-center gap-2 text-primary-dark contact-us-btn" href="{{ route('contact-us-view') }}">
                             Contact Us
                             <i class="bi bi-arrow-right-short text-primary-dark"></i>
                         </a>

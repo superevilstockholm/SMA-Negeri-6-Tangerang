@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers\MasterData;
+
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+
+// Models
+use App\Models\MasterData\Contact;
+
+// Requests
+use App\Http\Requests\MasterData\Contact\AttemptRequest;
+
+class ContactController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Contact $contact)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Contact $contact)
+    {
+        //
+    }
+
+    public function contactUsView(): View
+    {
+        return view('pages.contact-us');
+    }
+
+    public function contactUsAttempt(AttemptRequest $request): RedirectResponse
+    {
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('contact-us-view')->with('success', 'Your message has been sent!');
+    }
+}

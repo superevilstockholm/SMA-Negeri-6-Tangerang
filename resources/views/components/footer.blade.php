@@ -63,7 +63,7 @@
                                     <a class="nav-link" href="#">Events</a>
                                 </div>
                                 <div class="nav-item">
-                                    <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                                    <a class="nav-link" href="{{ route('contact-us-view') }}">Contact Us</a>
                                 </div>
                                 <div class="nav-item d-flex align-items-center gap-3 social-links">
                                     <a class="nav-link" href="https://www.instagram.com/sman6tangerang/" target="_blank">
