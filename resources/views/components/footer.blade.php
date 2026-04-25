@@ -109,15 +109,6 @@
         footer .nav-item:not(.social-links) .nav-link:hover {
             transform: translateX(10px);
         }
-        footer .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        footer .reveal.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 @endpush
 @push('js')

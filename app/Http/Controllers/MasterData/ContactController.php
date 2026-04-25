@@ -24,7 +24,7 @@ class ContactController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Contact::query();
+        $query = Contact::query()->orderBy('created_at', 'desc');
 
         if (isset($validated['name'])) {
             $query->where('name', 'ILIKE', '%' . $validated['name'] . '%');

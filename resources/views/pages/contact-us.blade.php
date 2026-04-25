@@ -29,7 +29,7 @@
             </div>
         </div>
     </section>
-    <section class="position-relative pb-60px pb-lg-90px pt-30px pt-lg-60px">
+    <section class="position-relative pb-60px pb-lg-90px pt-30px pt-lg-60px" id="contact-form">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0">
@@ -42,24 +42,24 @@
                 <div class="col-12 col-lg-6">
                     <form autocomplete="off" class="p-0 m-0" action="{{ route('contact-us-attempt') }}" method="POST">
                         @csrf
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 reveal">
                             <label for="name" class="form-label fw-medium mb-0">Full Name <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="name" name="name" value="{{ old('name') }}" autocomplete="off" required>
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 reveal">
                             <label for="email" class="form-label fw-medium mb-0">Email Address <span
                                     class="text-danger">*</span></label>
                             <input type="email" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="email" name="email" value="{{ old('email') }}" autocomplete="off" required>
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 reveal">
                             <label for="phone" class="form-label fw-medium mb-0">Phone</label>
                             <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent"
                                 id="phone" name="phone" value="{{ old('phone') }}" placeholder="+62" autocomplete="off">
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 reveal">
                             <label for="message" class="form-label fw-medium mb-0">Message <span
                                     class="text-danger">*</span></label>
                             <textarea class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent" id="message" name="message"
@@ -106,24 +106,24 @@
             </div>
         </div>
     </section>
-    <section class="pb-30px pb-lg-60px pt-30px pt-lg-60px">
+    <section class="pb-30px pb-lg-60px pt-30px pt-lg-60px" id="contact-option">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-4 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                <div class="col-12 col-lg-4 d-flex align-items-start mb-4 mb-lg-0 reveal">
                     <i class="bi bi-envelope fs-1 py-0 my-0"></i>
                     <div class="d-flex flex-column ms-3">
                         <h5 class="mb-0 fw-semibold">Email</h5>
                         <p class="mb-0 fw-medium text-muted">sman6tangerangkota@gmail.com</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                <div class="col-12 col-lg-3 d-flex align-items-start mb-4 mb-lg-0 reveal">
                     <i class="bi bi-phone fs-1 py-0 my-0"></i>
                     <div class="d-flex flex-column ms-3">
                         <h5 class="mb-0 fw-semibold">Phone</h5>
                         <p class="mb-0 fw-medium text-muted">(021) 5587229</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-5 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
+                <div class="col-12 col-lg-5 d-flex align-items-start mb-4 mb-lg-0 reveal">
                     <i class="bi bi-geo-alt fs-1 py-0 my-0"></i>
                     <div class="d-flex flex-column ms-3">
                         <h5 class="mb-0 fw-semibold">Address</h5>
@@ -153,35 +153,44 @@
         html[data-bs-theme="dark"] .border-bottom {
             border-bottom: 1px solid rgba(var(--bs-body-color-rgb), 0.1) !important;
         }
-        .contact-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-        .contact-reveal.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 @endpush
 @push('js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const contactReveals = document.querySelectorAll('.contact-reveal');
-            const contactObserver = new IntersectionObserver((entries) => {
+            const reveals = document.querySelectorAll('#contact-form .reveal');
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        const index = Array.from(contactReveals).indexOf(entry.target);
+                        const index = Array.from(reveals).indexOf(entry.target);
                         setTimeout(() => {
                             entry.target.classList.add('show');
-                        }, index * 150);
-                        contactObserver.unobserve(entry.target);
+                        }, index * 100);
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
                 threshold: 0.15
             });
-            contactReveals.forEach(el => contactObserver.observe(el));
+            reveals.forEach(el => observer.observe(el));
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('#contact-option .reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(reveals).indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 150);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+            reveals.forEach(el => observer.observe(el));
         });
     </script>
 @endpush
