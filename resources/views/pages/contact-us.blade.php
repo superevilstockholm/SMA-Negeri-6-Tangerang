@@ -83,11 +83,11 @@
             </div>
         </div>
     </section>
-    <section class="position-relative bg-primary-dark pb-60px pb-lg-90px pt-30px pt-lg-60px">
+    <section class="position-relative bg-primary-dark pb-60px pb-lg-90px pt-30px pt-lg-60px" id="contact-map">
         <div class="container">
             <div class="row">
                 <div class="col" style="height: 450px;">
-                    <iframe class="w-100 h-100 border-0 rounded-3"
+                    <iframe class="w-100 h-100 border-0 rounded-3 reveal"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d626.2898128900872!2d106.64528558440489!3d-6.161056796023141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8b8b5a2c581%3A0x953db60512db4685!2sSMAN%206%20TANGERANG!5e1!3m2!1sid!2sid!4v1777038122431!5m2!1sid!2sid"
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -159,6 +159,24 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const reveals = document.querySelectorAll('#contact-form .reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(reveals).indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+            reveals.forEach(el => observer.observe(el));
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('#contact-map .reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
