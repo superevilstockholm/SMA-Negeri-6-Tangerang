@@ -165,10 +165,6 @@
         .contact-reveal i {
             transition: transform 0.3s ease;
         }
-        .contact-reveal:hover i {
-            transform: scale(1.1);
-            color: var(--bs-primary);
-        }
     </style>
 @endpush
 @push('js')
