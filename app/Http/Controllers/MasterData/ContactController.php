@@ -71,9 +71,11 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
-        //
+        $contact->delete();
+
+        return redirect()->route('dashboard.admin.master-data.contacts.index')->with('success', 'Contact deleted successfully.');
     }
 
     public function contactUsView(): View
