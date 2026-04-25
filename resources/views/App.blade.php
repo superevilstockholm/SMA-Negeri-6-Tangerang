@@ -22,6 +22,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- SEO --}}
+    @hasSection('meta-description')
+        <meta name="description" content="@yield('meta-description')">
+    @endif
+    @hasSection('meta-keywords')
+        <meta name="keywords" content="@yield('meta-keywords')">
+    @endif
     <title>@yield('title', 'Home') - {{ config('app.name') }}</title>
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

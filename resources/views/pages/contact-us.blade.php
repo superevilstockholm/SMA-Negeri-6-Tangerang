@@ -1,5 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Contact Us')
+@section('meta-description', 'Hubungi SMAN 6 Tangerang untuk informasi sekolah, pendaftaran, layanan administrasi, kerja sama, dan pertanyaan umum. Temukan alamat, nomor telepon, email, serta formulir kontak resmi kami.')
+@section('meta-keywords', 'contact us SMAN 6 Tangerang, kontak SMAN 6 Tangerang, alamat SMAN 6 Tangerang, nomor telepon SMAN 6 Tangerang, email SMAN 6 Tangerang, sekolah negeri Tangerang, SMA Negeri 6 Kota Tangerang, hubungi sekolah Tangerang, pendaftaran SMAN 6 Tangerang')
 @section('content')
     <section class="position-relative">
         <div class="container-fluid">
