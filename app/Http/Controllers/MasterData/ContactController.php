@@ -58,9 +58,14 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Contact $contact)
+    public function show(Contact $contact): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.contact.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'contact' => $contact,
+        ]);
     }
 
     /**
