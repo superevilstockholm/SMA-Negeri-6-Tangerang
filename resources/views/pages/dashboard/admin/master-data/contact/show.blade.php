@@ -40,7 +40,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Readed At</div>
-                        <div class="col-md-8 fw-zmedium">{{ $contact->readed_at ?? 'Unread' }}</div>
+                        <div class="col-md-8 fw-zmedium">{{ $contact->read_at ?? 'Unread' }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12 text-muted">Message</div>
