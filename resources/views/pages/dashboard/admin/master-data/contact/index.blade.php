@@ -124,6 +124,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Status</th>
                                     <th>Message</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
@@ -142,6 +143,7 @@
                                         <td>{{ $contact->name ? ucwords(strtolower($contact->name)) : '-' }}</td>
                                         <td>{{ $contact->email ?? '-' }}</td>
                                         <td>{{ $contact->phone ?? '-' }}</td>
+                                        <td>{{ $contact->readed_at ? 'Read' : 'Unread' }}</td>
                                         <td>{{ $contact->message ? Str::limit($contact->message, 60) : '-' }}</td>
                                         <td>{{ $contact->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">

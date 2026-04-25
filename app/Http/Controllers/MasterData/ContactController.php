@@ -60,8 +60,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact): View
     {
-        if (!$contact->readed_at) {
-            $contact->readed_at = Carbon::now();
+        if (!$contact->read_at) {
+            $contact->read_at = Carbon::now();
             $contact->save();
         }
         return view('pages.dashboard.admin.master-data.contact.show', [
