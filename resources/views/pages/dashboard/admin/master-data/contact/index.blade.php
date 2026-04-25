@@ -14,12 +14,6 @@
                         <h3 class="p-0 m-0 mb-1 fw-semibold">Contact Records</h3>
                         <p class="p-0 m-0 fw-medium text-muted">Manage contact records.</p>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.master-data.contacts.create') }}"
-                            class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-plus me-1"></i> Create Contact
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
                 ]);
                 Route::resource('contacts', ContactController::class)->parameters([
                     'contacts' => 'contact',
-                ])->except(['edit', 'update']);
+                ])->only(['index', 'show', 'destroy']);
             });
         });
 

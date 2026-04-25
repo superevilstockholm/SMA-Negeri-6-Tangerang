@@ -8,7 +8,7 @@
                     <img class="w-100 h-100 object-fit-cover" style="max-height: 380px;"
                         src="{{ asset('static/img/contact-us-header-image.jpg') }}" alt="Contact Us Header Image">
                     <div
-                        class="position-absolute z-1 w-100 h-100 d-flex align-items-center justify-content-center top-0 start-0 bg-dark bg-opacity-50" style="padding-bottom: 60px;">
+                        class="position-absolute z-1 w-100 h-100 d-flex align-items-center justify-content-center top-0 start-0 bg-dark bg-opacity-50 pb-30px pb-lg-60px">
                         <h1 class="p-0 m-0 text-white fw-semibold display-4">Contact Us</h1>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </section>
-    <section class="position-relative" style="padding-bottom: 90px; padding-top: 60px;">
+    <section class="position-relative pb-60px pb-lg-90px pt-30px pt-lg-60px">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0">
@@ -81,7 +81,7 @@
             </div>
         </div>
     </section>
-    <section class="position-relative bg-primary-dark" style="padding-bottom: 90px; padding-top: 60px;">
+    <section class="position-relative bg-primary-dark pb-60px pb-lg-90px pt-30px pt-lg-60px">
         <div class="container">
             <div class="row">
                 <div class="col" style="height: 450px;">
@@ -104,7 +104,7 @@
             </div>
         </div>
     </section>
-    <section style="padding-bottom: 60px; padding-top: 60px;">
+    <section class="pb-30px pb-lg-60px pt-30px pt-lg-60px">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4 d-flex align-items-start mb-4 mb-lg-0 contact-reveal">
