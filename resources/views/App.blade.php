@@ -72,6 +72,11 @@
         .markdown-content * {
             margin-bottom: 0;
         }
+        @media (max-width: 575.98px) {
+            .pc-container {
+                top: 60px !important;
+            }
+        }
     </style>
 </body>
 </html>
