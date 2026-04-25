@@ -162,7 +162,7 @@
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item d-flex align-items-center gap-2 text-danger btn-delete"
                                                             data-id="{{ $contact->id }}"
-                                                            data-name="{{ $contact->name ?? '-' }}">
+                                                            data-name="{{ $contact->name ? ucwords(strtolower($contact->name)) : '-' }}">
                                                             <i class="ti ti-trash me-1 text-danger"></i> Delete
                                                         </button>
                                                     </form>
@@ -200,10 +200,10 @@
             document.querySelectorAll('.btn-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const contactId = this.getAttribute('data-id');
-                    const contactContent = this.getAttribute('data-name');
+                    const contactName = this.getAttribute('data-name');
                     Swal.fire({
                         title: "Delete Contact",
-                        text: "Are you sure you want to delete the following contact: \"" + contactContent +
+                        text: "Are you sure you want to delete the following contact: \"" + contactName +
                             "\"? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
