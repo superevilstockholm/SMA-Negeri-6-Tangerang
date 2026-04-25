@@ -1,5 +1,17 @@
-<footer data-bs-theme="dark">
-    <div class="bg-primary-dark py-4">
+<footer data-bs-theme="dark" class="position-relative mt-30px">
+    <div class="position-absolute z-2 w-100 top-0 start-0" style="transform: translateY(-100%);">
+        <div class="d-flex align-items-start">
+            <div class="bg-primary-dark flex-grow-1" style="height: 30px;"></div>
+            <div class="container d-flex p-0" style="flex: 0 0 auto; width: 100%;">
+                <div class="bg-primary-dark" style="flex: 2; height: 30px;"></div>
+                <div class="bg-primary-dark" style="width: 30px; height: 30px; border-top-right-radius: 100%;"></div>
+                <div class="bg-primary-dark" style="width: 30px; height: 30px; border-top-left-radius: 100%;"></div>
+                <div class="bg-primary-dark" style="flex: 1; height: 30px;"></div>
+            </div>
+            <div class="bg-primary-dark flex-grow-1" style="height: 30px;"></div>
+        </div>
+    </div>
+    <div class="bg-primary-dark py-30px py-lg-60px">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4">

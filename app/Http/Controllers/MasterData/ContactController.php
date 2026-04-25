@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
@@ -57,35 +56,26 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(Contact $contact)
+    public function show(Contact $contact): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.contact.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'contact' => $contact,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
-        //
+        $contact->delete();
+
+        return redirect()->route('dashboard.admin.master-data.contacts.index')->with('success', 'Contact deleted successfully.');
     }
 
     public function contactUsView(): View
