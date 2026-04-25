@@ -248,8 +248,15 @@ html[data-bs-theme="dark"] .modal-footer {
     color: #002155 !important;
 }
 
-.table-responsive {
-    overflow: visible !important;
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow: visible !important;
+    }
+}
+@media (max-width: 767.98px) {
+    .table-responsive {
+        overflow-x: auto !important;
+    }
 }
 
 .pt-30px {
