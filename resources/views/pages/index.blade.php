@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Home')
 @section('content')
+    <x-breadcrumb></x-breadcrumb>
     <section style="height: 720px;">
         <div class="container">
             <div class="row">

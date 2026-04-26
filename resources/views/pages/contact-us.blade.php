@@ -29,6 +29,7 @@
             </div>
         </div>
     </section>
+    <x-breadcrumb></x-breadcrumb>
     <section class="position-relative pb-60px pb-lg-90px pt-30px pt-lg-60px" id="contact-form">
         <div class="container">
             <div class="row g-4 g-lg-5">
