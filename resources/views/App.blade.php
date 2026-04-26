@@ -33,7 +33,7 @@
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz@0,14..32;1,14..32&display=swap" rel="stylesheet">
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('static/css/custom.css') }}">
     @stack('css')
@@ -65,7 +65,11 @@
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
+        input:-webkit-autofill:active,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        textarea:-webkit-autofill:active {
             -webkit-box-shadow: 0 0 0 0 transparent inset !important;
             box-shadow: 0 0 0 0 transparent inset !important;
             color: var(--bs-body-color) !important;
@@ -73,7 +77,11 @@
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
+        input:-webkit-autofill:active,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        textarea:-webkit-autofill:active {
             -webkit-text-fill-color: var(--bs-body-color) !important;
         }
         .markdown-content * {

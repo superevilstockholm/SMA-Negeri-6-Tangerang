@@ -26,6 +26,10 @@ html {
     font-family: 'Host Grotesk', sans-serif !important;
 }
 
+.ff-inter {
+    font-family: 'Inter', sans-serif !important;
+}
+
 .fs-09 {
     font-size: 0.85rem !important;
 }
@@ -248,6 +252,26 @@ html[data-bs-theme="dark"] .modal-footer {
     color: #002155 !important;
 }
 
+.btn-primary-dark {
+    background-color: #002155 !important;
+    border-color: #002155 !important;
+    color: #fff !important;
+}
+
+.btn-primary-dark:hover {
+    background-color: #001a44 !important;
+    border-color: #001a44 !important;
+    color: #fff !important;
+}
+
+.btn-primary-dark:focus,
+.btn-primary-dark:active {
+    background-color: #00163a !important;
+    border-color: #00163a !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 .25rem rgba(0, 33, 85, .25) !important;
+}
+
 @media (min-width: 768px) {
     .table-responsive {
         overflow: visible !important;
@@ -371,11 +395,11 @@ html[data-bs-theme="dark"] .modal-footer {
 }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition: all 0.6s ease-out !important;
 }
 .reveal.show {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
