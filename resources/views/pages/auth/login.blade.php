@@ -5,7 +5,7 @@
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center justify-content-center">
                 <div class="d-none d-lg-block col-lg-8 h-100 ps-0 overflow-hidden">
-                    <img class="w-100 h-100 object-fit-cover" src="{{ asset('static/img/login-placeholder.webp') }}" alt="Login Placeholder">
+                    <img class="w-100 h-100 object-fit-cover" src="#" alt="Login Placeholder">
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center">
                     <div class="card shadow-none border-0" style="max-width: 350px; background-color: transparent !important;">
@@ -29,6 +29,9 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="cf-turnstile mb-3"
+                                    data-sitekey="{{ config('services.turnstile.site_key') }}">
+                                </div>
                                 <button class="btn btn-sm btn-primary w-100 fw-medium" type="submit">Login</button>
                             </form>
                         </div>
@@ -39,6 +42,7 @@
     </section>
 @endsection
 @push('js')
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');

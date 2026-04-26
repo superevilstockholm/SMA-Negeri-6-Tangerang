@@ -403,3 +403,7 @@ html[data-bs-theme="dark"] .modal-footer {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+.cf-turnstile>div {
+    height: 65px !important;
+}
