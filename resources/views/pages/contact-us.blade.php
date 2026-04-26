@@ -31,7 +31,7 @@
     </section>
     <section class="position-relative pb-60px pb-lg-90px pt-30px pt-lg-60px" id="contact-form">
         <div class="container">
-            <div class="row">
+            <div class="row g-4 g-lg-5">
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                     <h1 class="display-6 fw-bold mb-0 d-flex align-items-center text-primary">
                         <span class="bg-primary d-block me-3 me-lg-4"
@@ -85,8 +85,15 @@
     </section>
     <section class="position-relative bg-primary-dark pb-60px pb-lg-90px pt-30px pt-lg-60px" id="contact-map">
         <div class="container">
-            <div class="row">
-                <div class="col" style="height: 450px;">
+            <div class="row g-4 g-lg-5 flex-lg-row-reverse">
+                <div class="col-12 col-lg-4">
+                    <h1 class="display-6 fw-bold mb-0 d-flex align-items-center text-white">
+                        <span class="bg-white d-block me-3 me-lg-4"
+                            style="width: 23px; height: 23px; transform: rotate(45deg);"></span>
+                        Our Location
+                    </h1>
+                </div>
+                <div class="col-12 col-lg-8" style="height: 450px;">
                     <iframe class="w-100 h-100 border-0 rounded-3 reveal" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d589.0263904843035!2d106.64510898206639!3d-6.1611566416457775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8b8b5a2c581%3A0x953db60512db4685!2sSMAN%206%20TANGERANG!5e0!3m2!1sid!2sid!4v1777166345604!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -106,26 +113,37 @@
     </section>
     <section class="pb-30px pb-lg-60px pt-30px pt-lg-60px" id="contact-option">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-4 d-flex align-items-start mb-4 mb-lg-0 reveal">
-                    <i class="bi bi-envelope fs-1 py-0 my-0"></i>
-                    <div class="d-flex flex-column ms-3">
-                        <h5 class="mb-0 fw-bold ff-inter text-uppercase">Email</h5>
-                        <p class="mb-0 fw-medium ff-inter">sman6tangerangkota@gmail.com</p>
-                    </div>
+            <div class="row g-4 g-lg-5">
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-6 fw-bold mb-0 d-flex align-items-center text-primary">
+                        <span class="bg-primary d-block me-3 me-lg-4"
+                            style="width: 23px; height: 23px; transform: rotate(45deg);"></span>
+                            Get In Touch
+                    </h1>
                 </div>
-                <div class="col-12 col-lg-3 d-flex align-items-start mb-4 mb-lg-0 reveal">
-                    <i class="bi bi-phone fs-1 py-0 my-0"></i>
-                    <div class="d-flex flex-column ms-3">
-                        <h5 class="mb-0 fw-bold ff-inter text-uppercase">Phone</h5>
-                        <p class="mb-0 fw-medium ff-inter">(021) 5587229</p>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-5 d-flex align-items-start mb-4 mb-lg-0 reveal">
-                    <i class="bi bi-geo-alt fs-1 py-0 my-0"></i>
-                    <div class="d-flex flex-column ms-3">
-                        <h5 class="mb-0 fw-bold ff-inter text-uppercase">Address</h5>
-                        <p class="mb-0 fw-medium ff-inter">Jln. Nyimas Melati No. 2, Kel. Karanganyar, Kec. Neglasari, Kota Tangerang, Prov Banten, 15121, Indonesia</p>
+                <div class="col-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-start mb-4 reveal">
+                            <i class="bi bi-envelope fs-1 py-0 my-0"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h5 class="mb-0 fw-bold ff-inter text-uppercase">Email</h5>
+                                <p class="mb-0 fw-medium ff-inter">sman6tangerangkota@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex align-items-start mb-4 reveal">
+                            <i class="bi bi-phone fs-1 py-0 my-0"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h5 class="mb-0 fw-bold ff-inter text-uppercase">Phone</h5>
+                                <p class="mb-0 fw-medium ff-inter">(021) 5587229</p>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex align-items-start mb-4 reveal">
+                            <i class="bi bi-geo-alt fs-1 py-0 my-0"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h5 class="mb-0 fw-bold ff-inter text-uppercase">Address</h5>
+                                <p class="mb-0 fw-medium ff-inter">Jln. Nyimas Melati No. 2, Kel. Karanganyar, Kec. Neglasari, Kota Tangerang, Prov Banten, 15121, Indonesia</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,58 +177,26 @@
 @endpush
 @push('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const reveals = document.querySelectorAll('#contact-form .reveal');
+        document.addEventListener('DOMContentLoaded', () => {
+            initReveal('#contact-form .reveal', 100);
+            initReveal('#contact-map .reveal', 100);
+            initReveal('#contact-option .reveal', 150);
+        });
+        function initReveal(selector, delay = 100) {
+            const items = document.querySelectorAll(selector);
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = Array.from(reveals).indexOf(entry.target);
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 100);
-                        observer.unobserve(entry.target);
-                    }
+                    if (!entry.isIntersecting) return;
+                    const index = [...items].indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * delay);
+                    observer.unobserve(entry.target);
                 });
             }, {
                 threshold: 0.15
             });
-            reveals.forEach(el => observer.observe(el));
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const reveals = document.querySelectorAll('#contact-map .reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = Array.from(reveals).indexOf(entry.target);
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 100);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.15
-            });
-            reveals.forEach(el => observer.observe(el));
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const reveals = document.querySelectorAll('#contact-option .reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = Array.from(reveals).indexOf(entry.target);
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 150);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.15
-            });
-            reveals.forEach(el => observer.observe(el));
-        });
+            items.forEach(item => observer.observe(item));
+        }
     </script>
 @endpush

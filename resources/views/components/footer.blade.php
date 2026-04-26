@@ -14,7 +14,7 @@
     <div class="bg-primary-dark py-30px py-lg-60px">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 mb-4" id="footer-about">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <a class="text-decoration-none" href="{{ route('index') }}">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 mb-4" id="footer-route-index">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-lg-0">
                             <a class="text-uppercase mb-3 text-white h5 text-decoration-none d-block" href="{{ route('about') }}">About</a>
@@ -113,22 +113,25 @@
 @endpush
 @push('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const reveals = document.querySelectorAll('footer .reveal');
+        document.addEventListener('DOMContentLoaded', () => {
+            initReveal('#footer-route-index .reveal', 100);
+            initReveal('#footer-about .reveal', 100);
+        });
+        function initReveal(selector, delay = 100) {
+            const items = document.querySelectorAll(selector);
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = [...reveals].indexOf(entry.target);
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 80);
-                        observer.unobserve(entry.target);
-                    }
+                    if (!entry.isIntersecting) return;
+                    const index = [...items].indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * delay);
+                    observer.unobserve(entry.target);
                 });
             }, {
                 threshold: 0.15
             });
-            reveals.forEach(el => observer.observe(el));
-        });
+            items.forEach(item => observer.observe(item));
+        }
     </script>
 @endpush
