@@ -5,12 +5,12 @@
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center justify-content-center">
                 <div class="d-none d-lg-block col-lg-8 h-100 ps-0 overflow-hidden">
-                    <img class="w-100 h-100 object-fit-cover" src="#" alt="Login Placeholder">
+                    <img class="w-100 h-100 object-fit-cover" src="{{ asset('static/img/login-placeholder.jpg') }}" alt="Login Placeholder">
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center">
                     <div class="card shadow-none border-0" style="max-width: 350px; background-color: transparent !important;">
                         <div class="card-body">
-                            <h1 class="h3 text-center fw-semibold mb-0">WELCOME BACK</h1>
+                            <h1 class="h3 text-center fw-bold mb-0">WELCOME BACK</h1>
                             <p class="text-muted text-center fw-medium">Login to your account to access your dashboard!</p>
                             <form class="p-0 m-0" action="{{ route('login-attempt') }}" method="POST">
                                 @csrf
