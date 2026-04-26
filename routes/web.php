@@ -27,13 +27,13 @@ Route::get('extracurricular', function () {
 })->name('extracurricular');
 
 Route::get('contact-us', [ContactController::class, 'contactUsView'])->name('contact-us-view');
-Route::post('contact-us', [ContactController::class, 'contactUsAttempt'])->name('contact-us-attempt');
+Route::post('contact-us', [ContactController::class, 'contactUsAttempt'])->middleware('turnstile')->name('contact-us-attempt');
 
 // Guest
 Route::middleware('guest')->group(function () {
     // Auth
     Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
-    Route::post('/login', [AuthController::class, 'loginAttempt'])->name('login-attempt');
+    Route::post('/login', [AuthController::class, 'loginAttempt'])->middleware('turnstile')->name('login-attempt');
 });
 
 // Protected
