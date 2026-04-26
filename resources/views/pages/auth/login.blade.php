@@ -29,7 +29,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="cf-turnstile mb-3 w-100"
+                                <div class="cf-turnstile mb-3"
                                     data-sitekey="{{ config('services.turnstile.site_key') }}">
                                 </div>
                                 <button class="btn btn-sm btn-primary w-100 fw-medium" type="submit">Login</button>

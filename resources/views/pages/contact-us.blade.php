@@ -65,7 +65,7 @@
                             <textarea class="form-control form-control-sm border-0 border-bottom rounded-0 bg-transparent" id="message" name="message"
                                 autocomplete="off" required>{{ old('message') }}</textarea>
                         </div>
-                        <div class="cf-turnstile mb-3 w-100 reveal"
+                        <div class="cf-turnstile mb-3 reveal"
                             data-sitekey="{{ config('services.turnstile.site_key') }}">
                         </div>
                         <button class="btn btn-sm btn-primary-dark w-100 reveal" type="submit">Submit</button>
