@@ -38,11 +38,11 @@ class ContactController extends Controller
         if (isset($validated['message'])) {
             $query->where('message', 'ILIKE', '%' . $validated['message'] . '%');
         }
-        if (isset($validated['startDate'])) {
-            $query->where('created_at', '>=', Carbon::parse($validated['startDate'])->startOfDay());
+        if (isset($validated['start_date'])) {
+            $query->where('created_at', '>=', Carbon::parse($validated['start_date'])->startOfDay());
         }
-        if (isset($validated['endDate'])) {
-            $query->where('created_at', '<=', Carbon::parse($validated['endDate'])->endOfDay());
+        if (isset($validated['end_date'])) {
+            $query->where('created_at', '<=', Carbon::parse($validated['end_date'])->endOfDay());
         }
 
         $contacts = $query->paginate($limit)->appends($request->except('page'));

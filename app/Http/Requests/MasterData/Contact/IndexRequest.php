@@ -27,8 +27,8 @@ class IndexRequest extends FormRequest
             'email' => ['sometimes', 'nullable', 'string', 'max:255'],
             'phone' => ['sometimes', 'nullable', 'string', 'max:20'],
             'message' => ['sometimes', 'nullable', 'string'],
-            'startDate' => ['sometimes', 'nullable', 'date'],
-            'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:startDate'],
+            'start_date' => ['sometimes', 'nullable', 'date'],
+            'end_date' => ['sometimes', 'nullable', 'date', 'after_or_equal:start_date'],
         ];
     }
 }

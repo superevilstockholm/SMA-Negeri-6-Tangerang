@@ -58,27 +58,51 @@
                             </div>
                         </div>
                         <div class="row mb-3 g-2">
-                            {{-- Content --}}
+                            {{-- Title --}}
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" name="content" class="form-control form-control-sm"
-                                        id="filterContent" placeholder="Content" value="{{ request('content') }}">
-                                    <label for="filterContent">Content</label>
+                                    <input type="text" name="title" class="form-control form-control-sm"
+                                        id="filterTitle" placeholder="Title" value="{{ request('title') }}">
+                                    <label for="filterTitle">Title</label>
+                                </div>
+                            </div>
+                            {{-- Description --}}
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" name="description" class="form-control form-control-sm"
+                                        id="filterDescription" placeholder="Description" value="{{ request('description') }}">
+                                    <label for="filterDescription">Description</label>
+                                </div>
+                            </div>
+                            {{-- Start Year --}}
+                            <div class="col-12 col-lg-6">
+                                <div class="form-floating">
+                                    <input type="number" name="start_year" class="form-control form-control-sm"
+                                        id="filterStartYear" placeholder="Start Year" value="{{ request('start_year') }}">
+                                    <label for="filterStartYear">Start Year</label>
+                                </div>
+                            </div>
+                            {{-- End Year --}}
+                            <div class="col-12 col-lg-6">
+                                <div class="form-floating">
+                                    <input type="number" name="end_year" class="form-control form-control-sm"
+                                        id="filterEndYear" placeholder="End Year" value="{{ request('end_year') }}">
+                                    <label for="filterEndYear">End Year</label>
                                 </div>
                             </div>
                             {{-- Start Date --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" name="startDate" class="form-control form-control-sm"
-                                        id="filterStartDate" value="{{ request('startDate') }}">
+                                    <input type="date" name="start_date" class="form-control form-control-sm"
+                                        id="filterStartDate" value="{{ request('start_date') }}">
                                     <label for="filterStartDate">Start Date</label>
                                 </div>
                             </div>
                             {{-- End Date --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" name="endDate" class="form-control form-control-sm"
-                                        id="filterEndDate" value="{{ request('endDate') }}">
+                                    <input type="date" name="end_date" class="form-control form-control-sm"
+                                        id="filterEndDate" value="{{ request('end_date') }}">
                                     <label for="filterEndDate">End Date</label>
                                 </div>
                             </div>

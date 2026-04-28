@@ -24,13 +24,13 @@ class IndexRequest extends FormRequest
         return [
             'limit' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
             'title' => ['sometimes', 'nullable', 'string', 'max:255'],
-            'decsription' => ['sometimes', 'nullable', 'string'],
-            'startYear' => ['sometimes', 'nullable', 'integer'],
-            'endYear' => ['sometimes', 'nullable', 'integer', 'gte:start_year'],
-            'startOrder' => ['sometimes', 'nullable', 'integer'],
-            'endOrder' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
-            'startDate' => ['sometimes', 'nullable', 'date'],
-            'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:startDate'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'start_year' => ['sometimes', 'nullable', 'integer'],
+            'end_year' => ['sometimes', 'nullable', 'integer', 'gte:start_year'],
+            'start_order' => ['sometimes', 'nullable', 'integer'],
+            'end_order' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
+            'start_date' => ['sometimes', 'nullable', 'date'],
+            'end_date' => ['sometimes', 'nullable', 'date', 'after_or_equal:start_date'],
         ];
     }
 }
