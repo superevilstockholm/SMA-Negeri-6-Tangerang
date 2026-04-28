@@ -114,9 +114,14 @@ class SchoolHistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SchoolHistory $schoolHistory)
+    public function show(SchoolHistory $schoolHistory): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.school-history.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'schoolHistory' => $schoolHistory,
+        ]);
     }
 
     /**
