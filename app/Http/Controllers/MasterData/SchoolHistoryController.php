@@ -172,8 +172,19 @@ class SchoolHistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SchoolHistory $schoolHistory)
+    public function destroy(SchoolHistory $schoolHistory): RedirectResponse
     {
-        //
+        DB::transaction(function () use ($schoolHistory) {
+            $schoolHistory = SchoolHistory::where('id', $schoolHistory->id)
+                ->lockForUpdate()
+                ->first();
+            $deletedOrder = $schoolHistory->order;
+            $schoolHistory->delete();
+            SchoolHistory::where('order', '>', $deletedOrder)
+                ->lockForUpdate()
+                ->decrement('order');
+        });
+
+        return redirect()->route('dashboard.admin.master-data.school-histories.index')->with('success', 'School History deleted successfully.');
     }
 }
