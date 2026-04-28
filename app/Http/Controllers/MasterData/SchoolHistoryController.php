@@ -34,40 +34,40 @@ class SchoolHistoryController extends Controller
         if (isset($validated['description'])) {
             $query->where('description', 'ILIKE', '%' . $validated['description'] . '%');
         }
-        if (isset($validated['startYear']) || isset($validated['endYear'])) {
+        if (isset($validated['start_year']) || isset($validated['end_year'])) {
             $query->where(function ($q) use ($validated) {
-                $startYear = $validated['startYear'] ?? null;
-                $endYear   = $validated['endYear'] ?? null;
-                if ($startYear && $endYear) {
-                    $q->where('start_year', '<=', $endYear)
-                    ->where(function ($qq) use ($startYear) {
+                $start_year = $validated['start_year'] ?? null;
+                $end_year   = $validated['end_year'] ?? null;
+                if ($start_year && $end_year) {
+                    $q->where('start_year', '<=', $end_year)
+                    ->where(function ($qq) use ($start_year) {
                         $qq->whereNull('end_year')
-                            ->orWhere('end_year', '>=', $startYear);
+                            ->orWhere('end_year', '>=', $start_year);
                     });
-                } elseif ($startYear) {
-                    $q->where(function ($qq) use ($startYear) {
-                        $qq->where('start_year', '>=', $startYear)
-                        ->orWhere('end_year', '>=', $startYear);
+                } elseif ($start_year) {
+                    $q->where(function ($qq) use ($start_year) {
+                        $qq->where('start_year', '>=', $start_year)
+                        ->orWhere('end_year', '>=', $start_year);
                     });
-                } elseif ($endYear) {
-                    $q->where(function ($qq) use ($endYear) {
-                        $qq->where('start_year', '<=', $endYear)
-                        ->orWhere('end_year', '<=', $endYear);
+                } elseif ($end_year) {
+                    $q->where(function ($qq) use ($end_year) {
+                        $qq->where('start_year', '<=', $end_year)
+                        ->orWhere('end_year', '<=', $end_year);
                     });
                 }
             });
         }
-        if (isset($validated['startOrder'])) {
-            $query->where('order', '>=', $validated['startOrder']);
+        if (isset($validated['start_order'])) {
+            $query->where('order', '>=', $validated['start_order']);
         }
-        if (isset($validated['endOrder'])) {
-            $query->where('order', '<=', $validated['endOrder']);
+        if (isset($validated['end_order'])) {
+            $query->where('order', '<=', $validated['end_order']);
         }
-        if (isset($validated['startDate'])) {
-            $query->where('created_at', '>=', Carbon::parse($validated['startDate'])->startOfDay());
+        if (isset($validated['start_date'])) {
+            $query->where('created_at', '>=', Carbon::parse($validated['start_date'])->startOfDay());
         }
-        if (isset($validated['endDate'])) {
-            $query->where('created_at', '<=', Carbon::parse($validated['endDate'])->endOfDay());
+        if (isset($validated['end_date'])) {
+            $query->where('created_at', '<=', Carbon::parse($validated['end_date'])->endOfDay());
         }
 
         $schoolHistories = $query->paginate($limit)->appends($request->except('page'));

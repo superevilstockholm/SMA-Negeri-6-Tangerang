@@ -69,16 +69,16 @@
                             {{-- Start Date --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" name="startDate" class="form-control form-control-sm"
-                                        id="filterStartDate" value="{{ request('startDate') }}">
+                                    <input type="date" name="start_date" class="form-control form-control-sm"
+                                        id="filterStartDate" value="{{ request('start_date') }}">
                                     <label for="filterStartDate">Start Date</label>
                                 </div>
                             </div>
                             {{-- End Date --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-floating">
-                                    <input type="date" name="endDate" class="form-control form-control-sm"
-                                        id="filterEndDate" value="{{ request('endDate') }}">
+                                    <input type="date" name="end_date" class="form-control form-control-sm"
+                                        id="filterEndDate" value="{{ request('end_date') }}">
                                     <label for="filterEndDate">End Date</label>
                                 </div>
                             </div>
