@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MasterData\VisionController;
 use App\Http\Controllers\MasterData\MissionController;
 use App\Http\Controllers\MasterData\ContactController;
+use App\Http\Controllers\MasterData\SchoolHistoryController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
                 ]);
                 Route::resource('missions', MissionController::class)->parameters([
                     'missions' => 'mission',
+                ]);
+                Route::resource('school-histories', SchoolHistoryController::class)->parameters([
+                    'school-histories' => 'schoolHistory',
                 ]);
                 Route::resource('contacts', ContactController::class)->parameters([
                     'contacts' => 'contact',
