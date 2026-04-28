@@ -24,11 +24,11 @@ class IndexRequest extends FormRequest
         return [
             'limit' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
             'title' => ['sometimes', 'nullable', 'string', 'max:255'],
-            'decsription' => ['sometimes', 'nullable', 'string'],
+            'description' => ['sometimes', 'nullable', 'string'],
             'startYear' => ['sometimes', 'nullable', 'integer'],
-            'endYear' => ['sometimes', 'nullable', 'integer', 'gte:start_year'],
+            'endYear' => ['sometimes', 'nullable', 'integer', 'gte:startYear'],
             'startOrder' => ['sometimes', 'nullable', 'integer'],
-            'endOrder' => ['sometimes', 'nullable', 'integer', 'gte:start_order'],
+            'endOrder' => ['sometimes', 'nullable', 'integer', 'gte:startOrder'],
             'startDate' => ['sometimes', 'nullable', 'date'],
             'endDate' => ['sometimes', 'nullable', 'date', 'after_or_equal:startDate'],
         ];
