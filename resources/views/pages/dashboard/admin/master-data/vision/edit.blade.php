@@ -30,8 +30,8 @@
                         @method('PUT')
                         <div class="form-floating mb-3">
                             <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="floatingInputContent"
-                                placeholder="Content" autocomplete="off" required>{{ old('content', $vision->content) }}</textarea>
-                            <label for="floatingInputContent">Content</label>
+                                placeholder="Content" autocomplete="off" required data-lenis-prevent>{{ old('content', $vision->content) }}</textarea>
+                            <label for="floatingInputContent">Content <span class="text-danger">*</span></label>
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -48,7 +48,7 @@
                                     </option>
                                 @endfor
                             </select>
-                            <label for="floatingInputOrder">Display Order</label>
+                            <label for="floatingInputOrder">Display Order <span class="text-danger">*</span></label>
                             @error('order')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
