@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +14,7 @@ use App\Models\MasterData\SchoolHistory;
 // Requests
 use App\Http\Requests\MasterData\SchoolHistory\IndexRequest;
 use App\Http\Requests\MasterData\SchoolHistory\StoreRequest;
+use App\Http\Requests\MasterData\SchoolHistory\UpdateRequest;
 
 class SchoolHistoryController extends Controller
 {
@@ -127,17 +127,46 @@ class SchoolHistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SchoolHistory $schoolHistory)
+    public function edit(SchoolHistory $schoolHistory): View
     {
-        //
+        $allowedMaxOrder = SchoolHistory::count();
+        return view('pages.dashboard.admin.master-data.school-history.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowedMaxOrder' => $allowedMaxOrder,
+            'schoolHistory' => $schoolHistory,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SchoolHistory $schoolHistory)
+    public function update(UpdateRequest $request, SchoolHistory $schoolHistory): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated, $schoolHistory) {
+            $schoolHistory = SchoolHistory::where('id', $schoolHistory->id)
+                ->lockForUpdate()
+                ->first();
+            if ($validated['order'] != $schoolHistory->order) {
+                if ($validated['order'] < $schoolHistory->order) {
+                    SchoolHistory::where('order', '>=', $validated['order'])
+                        ->where('order', '<', $schoolHistory->order)
+                        ->lockForUpdate()
+                        ->increment('order');
+                } else {
+                    SchoolHistory::where('order', '>', $schoolHistory->order)
+                        ->where('order', '<=', $validated['order'])
+                        ->lockForUpdate()
+                        ->decrement('order');
+                }
+            }
+            $schoolHistory->update($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.school-histories.index')->with('success', 'School History updated successfully.');
     }
 
     /**
