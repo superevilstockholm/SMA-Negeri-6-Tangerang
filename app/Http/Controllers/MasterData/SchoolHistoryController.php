@@ -5,13 +5,16 @@ namespace App\Http\Controllers\MasterData;
 use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\MasterData\SchoolHistory;
 
 // Requests
 use App\Http\Requests\MasterData\SchoolHistory\IndexRequest;
+use App\Http\Requests\MasterData\SchoolHistory\StoreRequest;
 
 class SchoolHistoryController extends Controller
 {
@@ -80,17 +83,32 @@ class SchoolHistoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $allowedMaxOrder = SchoolHistory::count() + 1;
+        return view('pages.dashboard.admin.master-data.school-history.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'allowedMaxOrder' => $allowedMaxOrder,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated) {
+            SchoolHistory::where('order', '>=', $validated['order'])
+                ->lockForUpdate()
+                ->increment('order');
+            SchoolHistory::create($validated);
+        });
+
+        return redirect()->route('dashboard.admin.master-data.school-histories.index')->with('success', 'School History created successfully.');
     }
 
     /**
