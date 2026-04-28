@@ -58,12 +58,36 @@
                             </div>
                         </div>
                         <div class="row mb-3 g-2">
-                            {{-- Content --}}
+                            {{-- Title --}}
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" name="content" class="form-control form-control-sm"
-                                        id="filterContent" placeholder="Content" value="{{ request('content') }}">
-                                    <label for="filterContent">Content</label>
+                                    <input type="text" name="title" class="form-control form-control-sm"
+                                        id="filterTitle" placeholder="Title" value="{{ request('title') }}">
+                                    <label for="filterTitle">Title</label>
+                                </div>
+                            </div>
+                            {{-- Description --}}
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" name="description" class="form-control form-control-sm"
+                                        id="filterDescription" placeholder="Description" value="{{ request('description') }}">
+                                    <label for="filterDescription">Description</label>
+                                </div>
+                            </div>
+                            {{-- Start Year --}}
+                            <div class="col-12 col-lg-6">
+                                <div class="form-floating">
+                                    <input type="number" name="startYear" class="form-control form-control-sm"
+                                        id="filterStartYear" placeholder="Start Year" value="{{ request('startYear') }}">
+                                    <label for="filterStartYear">Start Year</label>
+                                </div>
+                            </div>
+                            {{-- End Year --}}
+                            <div class="col-12 col-lg-6">
+                                <div class="form-floating">
+                                    <input type="number" name="endYear" class="form-control form-control-sm"
+                                        id="filterEndYear" placeholder="End Year" value="{{ request('endYear') }}">
+                                    <label for="filterEndYear">End Year</label>
                                 </div>
                             </div>
                             {{-- Start Date --}}
