@@ -11,6 +11,9 @@ use App\Http\Controllers\MasterData\MissionController;
 use App\Http\Controllers\MasterData\ContactController;
 use App\Http\Controllers\MasterData\SchoolHistoryController;
 
+// Gallery Controllers
+use App\Http\Controllers\Gallery\GroupController;
+
 Route::get('/', function () {
     return view('pages.index');
 })->name('index');
@@ -63,6 +66,12 @@ Route::middleware('auth')->group(function () {
                 Route::resource('contacts', ContactController::class)->parameters([
                     'contacts' => 'contact',
                 ])->only(['index', 'show', 'destroy']);
+            });
+            // Gallery
+            Route::prefix('gallery')->name('gallery.')->group(function () {
+                Route::resource('groups', GroupController::class)->parameters([
+                    'groups' => 'group',
+                ]);
             });
         });
 
