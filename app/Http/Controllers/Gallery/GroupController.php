@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\Gallery\Group;
 
 // Requests
 use App\Http\Requests\Gallery\Group\IndexRequest;
+use App\Http\Requests\Gallery\Group\StoreRequest;
 
 class GroupController extends Controller
 {
@@ -54,17 +56,25 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('pages.dashboard.admin.gallery.group.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        Group::create($validated);
+
+        return redirect()->route('dashboard.admin.gallery.groups.index')->with('success', 'Group created successfully.');
     }
 
     /**

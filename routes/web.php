@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
             });
             // Gallery
             Route::prefix('gallery')->name('gallery.')->group(function () {
-                Route::resource('groups', VisionController::class)->parameters([
+                Route::resource('groups', GroupController::class)->parameters([
                     'groups' => 'group',
                 ]);
             });

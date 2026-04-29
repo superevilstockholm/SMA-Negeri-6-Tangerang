@@ -14,7 +14,7 @@ if (!function_exists('adminSidebarItems')) {
                 ['label' => 'contacts', 'icon' => 'ti ti-message-2-share', 'route' => 'dashboard.admin.master-data.contacts.index', 'activePattern' => 'dashboard.admin.master-data.contacts.*'],
             ],
             'gallery' => [
-                ['label' => 'groups', 'icon' => 'ti ti-target', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],
+                ['label' => 'groups', 'icon' => 'ti ti-folders', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],
             ],
         ];
     }
