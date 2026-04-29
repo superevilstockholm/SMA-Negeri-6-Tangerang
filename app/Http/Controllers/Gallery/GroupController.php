@@ -118,8 +118,10 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Group $group)
+    public function destroy(Group $group): RedirectResponse
     {
-        //
+        $group->delete();
+
+        return redirect()->route('dashboard.admin.gallery.groups.index')->with('success', 'Group deleted successfully.');
     }
 }
