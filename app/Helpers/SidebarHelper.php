@@ -12,7 +12,10 @@ if (!function_exists('adminSidebarItems')) {
                 ['label' => 'mission', 'icon' => 'ti ti-list-check', 'route' => 'dashboard.admin.master-data.missions.index', 'activePattern' => 'dashboard.admin.master-data.missions.*'],
                 ['label' => 'school histories', 'icon' => 'ti ti-timeline-event', 'route' => 'dashboard.admin.master-data.school-histories.index', 'activePattern' => 'dashboard.admin.master-data.school-histories.*'],
                 ['label' => 'contacts', 'icon' => 'ti ti-message-2-share', 'route' => 'dashboard.admin.master-data.contacts.index', 'activePattern' => 'dashboard.admin.master-data.contacts.*'],
-            ]
+            ],
+            'gallery' => [
+                ['label' => 'groups', 'icon' => 'ti ti-target', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],
+            ],
         ];
     }
 }
