@@ -80,9 +80,14 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Group $group)
+    public function show(Group $group): View
     {
-        //
+        return view('pages.dashboard.admin.gallery.group.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'group' => $group,
+        ]);
     }
 
     /**
