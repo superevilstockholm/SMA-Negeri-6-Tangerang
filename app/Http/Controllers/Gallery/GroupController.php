@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Gallery;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
@@ -14,6 +13,7 @@ use App\Models\Gallery\Group;
 // Requests
 use App\Http\Requests\Gallery\Group\IndexRequest;
 use App\Http\Requests\Gallery\Group\StoreRequest;
+use App\Http\Requests\Gallery\Group\UpdateRequest;
 
 class GroupController extends Controller
 {
@@ -93,17 +93,26 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Group $group)
+    public function edit(Group $group): View
     {
-        //
+        return view('pages.dashboard.admin.gallery.group.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'group' => $group,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Group $group)
+    public function update(UpdateRequest $request, Group $group): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $group->update($validated);
+
+        return redirect()->route('dashboard.admin.gallery.groups.index')->with('success', 'Group updated successfully.');
     }
 
     /**
