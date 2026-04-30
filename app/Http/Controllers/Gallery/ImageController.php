@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\Gallery\Image;
@@ -13,6 +14,7 @@ use App\Models\Gallery\Group;
 
 // Requests
 use App\Http\Requests\Gallery\Image\IndexRequest;
+use App\Http\Requests\Gallery\Image\StoreRequest;
 
 class ImageController extends Controller
 {
@@ -55,17 +57,31 @@ class ImageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $groups = Group::all();
+        return view('pages.dashboard.admin.gallery.image.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'groups' => $groups,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->hasFile('image_file')) {
+            $validated['file_path'] = $request->file('image_file')->store('gallery/images', 'public');
+        }
+
+        Image::create($validated);
+
+        return redirect()->route('dashboard.admin.gallery.images.index')->with('success', 'Image has been created!');
     }
 
     /**
