@@ -121,6 +121,8 @@
                                     <th class="text-center">#</th>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Images</th>
+                                    <th>Videos</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -137,6 +139,8 @@
                                         </td>
                                         <td>{{ $group->title ?? '-' }}</td>
                                         <td>{{ $group->description ? Str::limit($group->description, 60) : '-' }}</td>
+                                        <td>{{ $group->images_count ?? '0' }}</td>
+                                        <td>{{ $group->videos_count ?? '0' }}</td>
                                         <td>{{ $group->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">
@@ -170,7 +174,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">
+                                        <td colspan="7" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
                                                 No group records found for the selected filters.
                                             </div>

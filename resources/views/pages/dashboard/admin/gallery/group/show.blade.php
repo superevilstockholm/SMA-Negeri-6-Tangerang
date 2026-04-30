@@ -38,6 +38,14 @@
                         <div class="col-md-4 text-muted">Description</div>
                         <div class="col-md-8 fw-medium">{{ $group->description ?? '-' }}</div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 text-muted">Images</div>
+                        <div class="col-md-8 fw-medium">{{ $group->images_count ?? '0' }}</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 text-muted">Videos</div>
+                        <div class="col-md-8 fw-medium">{{ $group->videos_count ?? '0' }}</div>
+                    </div>
                     <h4 class="card-title fw-semibold mt-4 mb-3">System Information</h4>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Group ID</div>
