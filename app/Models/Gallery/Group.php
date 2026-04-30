@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 // Models
 use App\Models\Gallery\Image;
+use App\Models\Gallery\Video;
 
 #[Fillable(['title', 'description'])]
 class Group extends Model
@@ -53,5 +54,10 @@ class Group extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
     }
 }
