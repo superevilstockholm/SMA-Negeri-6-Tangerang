@@ -135,8 +135,14 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Image $image)
+    public function destroy(Image $image): RedirectResponse
     {
-        //
+        if ($image->file_path && Storage::disk('public')->exists($image->file_path)) {
+            Storage::disk('public')->delete($image->file_path);
+        }
+
+        $image->delete();
+
+        return redirect()->route('dashboard.admin.gallery.images.index')->with('success', 'Image deleted successfully.');
     }
 }
