@@ -87,9 +87,14 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Image $image)
+    public function show(Image $image): View
     {
-        //
+        return view('pages.dashboard.admin.gallery.image.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'image' => $image->load(['group']),
+        ]);
     }
 
     /**
