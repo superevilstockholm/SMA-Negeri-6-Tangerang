@@ -13,6 +13,7 @@ use App\Http\Controllers\MasterData\SchoolHistoryController;
 
 // Gallery Controllers
 use App\Http\Controllers\Gallery\GroupController;
+use App\Http\Controllers\Gallery\ImageController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -71,6 +72,9 @@ Route::middleware('auth')->group(function () {
             Route::prefix('gallery')->name('gallery.')->group(function () {
                 Route::resource('groups', GroupController::class)->parameters([
                     'groups' => 'group',
+                ]);
+                Route::resource('images', ImageController::class)->parameters([
+                    'images' => 'image',
                 ]);
             });
         });
