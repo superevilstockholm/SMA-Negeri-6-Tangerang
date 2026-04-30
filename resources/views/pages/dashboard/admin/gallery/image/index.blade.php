@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Group Management')
+@section('title', 'Image Management')
 @section('content')
     @php
         use Illuminate\Support\Str;
@@ -11,13 +11,13 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Group Records</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Manage group records.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">Image Records</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">Manage image records.</p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.gallery.groups.create') }}"
+                        <a href="{{ route('dashboard.admin.gallery.images.create') }}"
                             class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-plus me-1"></i> Create Group
+                            <i class="ti ti-plus me-1"></i> Create Image
                         </a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
         <div class="col">
             <div class="card my-0">
                 <div class="card-body">
-                    <form method="GET" action="{{ route('dashboard.admin.gallery.groups.index') }}" id="filterForm">
+                    <form method="GET" action="{{ route('dashboard.admin.gallery.images.index') }}" id="filterForm">
                         <div
                             class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-3 gap-2 gap-md-0">
                             <div class="d-flex align-items-center">
@@ -49,37 +49,32 @@
                                 <span class="ms-2">entries</span>
                             </div>
                             <div class="text-muted small">
-                                @if ($groups instanceof LengthAwarePaginator)
-                                    Showing {{ $groups->firstItem() }} to {{ $groups->lastItem() }} of
-                                    {{ $groups->total() }} entries
+                                @if ($images instanceof LengthAwarePaginator)
+                                    Showing {{ $images->firstItem() }} to {{ $images->lastItem() }} of
+                                    {{ $images->total() }} entries
                                 @else
-                                    Showing {{ $groups->count() }} entries
+                                    Showing {{ $images->count() }} entries
                                 @endif
                             </div>
                         </div>
                         <div class="row mb-3 g-2">
-                            {{-- Title --}}
-                            <div class="col-12 col-lg-6">
-                                <div class="form-floating">
-                                    <input type="text" name="title" class="form-control form-control-sm"
-                                        id="filterTitle" placeholder="Title" value="{{ request('title') }}">
-                                    <label for="filterTitle">Title</label>
-                                </div>
-                            </div>
-                            {{-- Slug --}}
-                            <div class="col-12 col-lg-6">
-                                <div class="form-floating">
-                                    <input type="text" name="slug" class="form-control form-control-sm"
-                                        id="filterSlug" placeholder="Slug" value="{{ request('slug') }}">
-                                    <label for="filterSlug">Slug</label>
-                                </div>
-                            </div>
-                            {{-- Description --}}
+                            {{-- Group Name --}}
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" name="description" class="form-control form-control-sm"
-                                        id="filterDescription" placeholder="Description" value="{{ request('description') }}">
-                                    <label for="filterDescription">Description</label>
+                                    <select name="group_id" id="filterGroupName"
+                                        class="form-select @error('group_id') is-invalid @enderror">
+                                        <option value="" {{ (old('group_id', request('group_id')) === null || old('group_id', request('group_id'))) === '' ? 'selected' : '' }}>Select Group</option>
+                                        <option value="0" {{ old('group_id', request('group_id')) == '0' ? 'selected' : '' }}>Images Without Group</option>
+                                        @foreach ($groups as $group)
+                                            <option value="{{ $group->id }}" {{ old('group_id', request('group_id')) == $group->id ? 'selected' : '' }}>
+                                                {{ $group->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="filterGroupName">Group Name</label>
+                                    @error('group_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             {{-- Start Date --}}
@@ -107,37 +102,39 @@
                             </div>
                             {{-- Reset Buttons --}}
                             <div class="col-12 col-md-6">
-                                <a href="{{ route('dashboard.admin.gallery.groups.index') }}"
+                                <a href="{{ route('dashboard.admin.gallery.images.index') }}"
                                     class="btn btn-secondary w-100 d-flex align-items-center justify-content-center gap-2">
                                     <i class="ti ti-rotate-clockwise-2"></i> Reset Filters
                                 </a>
                             </div>
                         </div>
                     </form>
-                    <div class="table-responsive @if (!($groups instanceof LengthAwarePaginator && $groups->hasPages())) mb-0 @else mb-3 @endif">
+                    <div class="table-responsive @if (!($images instanceof LengthAwarePaginator && $images->hasPages())) mb-0 @else mb-3 @endif">
                         <table class="table table-striped table-hover align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Preview Image</th>
+                                    <th>Group Name</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($groups as $index => $group)
+                                @forelse ($images as $index => $image)
                                     <tr>
                                         <td class="text-center">
-                                            @if ($groups instanceof LengthAwarePaginator)
-                                                {{ $groups->firstItem() + $loop->index }}
+                                            @if ($images instanceof LengthAwarePaginator)
+                                                {{ $images->firstItem() + $loop->index }}
                                             @else
                                                 {{ $loop->iteration }}
                                             @endif
                                         </td>
-                                        <td>{{ $group->title ?? '-' }}</td>
-                                        <td>{{ $group->description ? Str::limit($group->description, 60) : '-' }}</td>
-                                        <td>{{ $group->created_at?->format('d M Y H:i') }}</td>
+                                        <td>
+                                            <img class="rounded object-fit-cover" style="width: 200px; height: 100px;" src="{{ $image->file_url }}" alt="{{ $image->group?->title ? ($image->group->title . ' Image') : ('Image ' . $image->id) }}">
+                                        </td>
+                                        <td>{{ $image->group?->title ?? '-' }}</td>
+                                        <td>{{ $image->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">
                                                 <button type="button" class="btn border-0 p-0 dropdown-toggle hide-arrow"
@@ -146,21 +143,20 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.gallery.groups.show', $group->id) }}">
+                                                        href="{{ route('dashboard.admin.gallery.images.show', $image->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.gallery.groups.edit', $group->id) }}">
+                                                        href="{{ route('dashboard.admin.gallery.images.edit', $image->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
                                                     </a>
-                                                    <form id="form-delete-{{ $group->id }}"
-                                                        action="{{ route('dashboard.admin.gallery.groups.destroy', $group->id) }}"
+                                                    <form id="form-delete-{{ $image->id }}"
+                                                        action="{{ route('dashboard.admin.gallery.images.destroy', $image->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item d-flex align-items-center gap-2 text-danger btn-delete"
-                                                            data-id="{{ $group->id }}"
-                                                            data-title="{{ $group->title ?? '-' }}">
+                                                            data-id="{{ $image->id }}">
                                                             <i class="ti ti-trash me-1 text-danger"></i> Delete
                                                         </button>
                                                     </form>
@@ -172,7 +168,7 @@
                                     <tr>
                                         <td colspan="5" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
-                                                No group records found for the selected filters.
+                                                No image records found for the selected filters.
                                             </div>
                                         </td>
                                     </tr>
@@ -180,10 +176,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($groups instanceof LengthAwarePaginator && $groups->hasPages())
+                    @if ($images instanceof LengthAwarePaginator && $images->hasPages())
                         <div class="overflow-x-auto mt-0 py-1">
                             <div class="d-flex justify-content-center d-md-block w-100 px-3">
-                                {{ $groups->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+                                {{ $images->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     @endif
@@ -197,12 +193,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.btn-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const groupId = this.getAttribute('data-id');
-                    const groupTitle = this.getAttribute('data-title');
+                    const imageId = this.getAttribute('data-id');
                     Swal.fire({
-                        title: "Delete Group",
-                        text: "Are you sure you want to delete the following group: \"" + groupTitle +
-                            "\"? This action cannot be undone.",
+                        title: "Delete Image",
+                        text: "Are you sure you want to delete the image? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#d33",
@@ -211,7 +205,7 @@
                         cancelButtonText: "Cancel"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            document.getElementById('form-delete-' + groupId).submit();
+                            document.getElementById('form-delete-' + imageId).submit();
                         }
                     });
                 });
