@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 // Attributes
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
+// Models
+use App\Models\Gallery\Image;
+
 #[Fillable(['title', 'description'])]
 class Group extends Model
 {
@@ -45,5 +48,10 @@ class Group extends Model
         return self::when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
             ->where('slug', $slug)
             ->exists();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
