@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Gallery;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 // Models
 use App\Models\Gallery\Image;
@@ -15,6 +15,7 @@ use App\Models\Gallery\Group;
 // Requests
 use App\Http\Requests\Gallery\Image\IndexRequest;
 use App\Http\Requests\Gallery\Image\StoreRequest;
+use App\Http\Requests\Gallery\Image\UpdateRequest;
 
 class ImageController extends Controller
 {
@@ -81,7 +82,7 @@ class ImageController extends Controller
 
         Image::create($validated);
 
-        return redirect()->route('dashboard.admin.gallery.images.index')->with('success', 'Image has been created!');
+        return redirect()->route('dashboard.admin.gallery.images.index')->with('success', 'Image created successfully!');
     }
 
     /**
@@ -100,17 +101,35 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Image $image)
+    public function edit(Image $image): View
     {
-        //
+        $groups = Group::all();
+        return view('pages.dashboard.admin.gallery.image.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'image' => $image,
+            'groups' => $groups,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Image $image)
+    public function update(UpdateRequest $request, Image $image): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->hasFile('image_file')) {
+            if ($image->file_path && Storage::disk('public')->exists($image->file_path)) {
+                Storage::disk('public')->delete($image->file_path);
+            }
+            $validated['file_path'] = $request->file('image_file')->store('gallery/images', 'public');
+        }
+
+        $image->update($validated);
+
+        return redirect()->route('dashboard.admin.gallery.images.index')->with('success', 'Image updated successfully!');
     }
 
     /**
