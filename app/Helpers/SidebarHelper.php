@@ -15,6 +15,7 @@ if (!function_exists('adminSidebarItems')) {
             ],
             'gallery' => [
                 ['label' => 'groups', 'icon' => 'ti ti-folders', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],
+                ['label' => 'images', 'icon' => 'ti ti-photo', 'route' => 'dashboard.admin.gallery.images.index', 'activePattern' => 'dashboard.admin.gallery.images.*'],
             ],
         ];
     }
