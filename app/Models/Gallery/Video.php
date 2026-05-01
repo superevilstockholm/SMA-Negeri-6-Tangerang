@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 // Models
 use App\Models\Gallery\Group;
 
-#[Fillable(['thumbail_path', 'file_path', 'group_id'])]
+#[Fillable(['thumbnail_path', 'file_path', 'group_id'])]
 #[Appends(['thumbnail_url', 'file_url'])]
 class Video extends Model
 {
