@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Gallery;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 // Models
 use App\Models\Gallery\Video;
@@ -15,6 +15,7 @@ use App\Models\Gallery\Group;
 // Requests
 use App\Http\Requests\Gallery\Video\IndexRequest;
 use App\Http\Requests\Gallery\Video\StoreRequest;
+use App\Http\Requests\Gallery\Video\UpdateRequest;
 
 // Jobs
 use App\Jobs\GenerateVideoThumbnailJob;
@@ -105,17 +106,43 @@ class VideoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Video $video)
+    public function edit(Video $video): View
     {
-        //
+        $groups = Group::all();
+        return view('pages.dashboard.admin.gallery.video.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'video' => $video,
+            'groups' => $groups,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Video $video)
+    public function update(UpdateRequest $request, Video $video):RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->hasFile('video_file')) {
+            if ($video->file_path && Storage::disk('public')->exists($video->file_path)) {
+                Storage::disk('public')->delete($video->file_path);
+            }
+            if ($video->thumbnail_path && Storage::disk('public')->exists($video->thumbnail_path)) {
+                Storage::disk('public')->delete($video->thumbnail_path);
+            }
+            $validated['file_path'] = $request->file('video_file')->store('gallery/videos', 'public');
+            $validated['thumbnail_path'] = null;
+        }
+
+        $video->update($validated);
+
+        if ($request->hasFile('video_file')) {
+            GenerateVideoThumbnailJob::dispatch($video->fresh());
+        }
+
+        return redirect()->route('dashboard.admin.gallery.videos.index')->with('success', 'Video updated successfully!');
     }
 
     /**
