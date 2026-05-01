@@ -14,6 +14,7 @@ use App\Http\Controllers\MasterData\SchoolHistoryController;
 // Gallery Controllers
 use App\Http\Controllers\Gallery\GroupController;
 use App\Http\Controllers\Gallery\ImageController;
+use App\Http\Controllers\Gallery\VideoController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
                 ]);
                 Route::resource('images', ImageController::class)->parameters([
                     'images' => 'image',
+                ]);
+                Route::resource('videos', VideoController::class)->parameters([
+                    'videos' => 'video',
                 ]);
             });
         });

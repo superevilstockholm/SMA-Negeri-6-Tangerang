@@ -25,7 +25,7 @@ class GroupController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Group::query()->orderBy('created_at', 'desc');
+        $query = Group::query()->withCount(['images', 'videos'])->orderBy('created_at', 'desc');
 
         if (isset($validated['title'])) {
             $query->where('title', 'ILIKE', '%' . $validated['title'] . '%');
@@ -86,7 +86,7 @@ class GroupController extends Controller
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'group' => $group,
+            'group' => $group->loadCount(['images', 'videos']),
         ]);
     }
 

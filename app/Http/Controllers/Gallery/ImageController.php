@@ -27,7 +27,7 @@ class ImageController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Image::query()->orderBy('created_at', 'desc');
+        $query = Image::query()->with(['group'])->orderBy('created_at', 'desc');
 
         if (isset($validated['group_id'])) {
             if ($validated['group_id'] === 0) {
