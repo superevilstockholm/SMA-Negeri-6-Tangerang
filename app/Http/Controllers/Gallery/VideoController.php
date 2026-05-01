@@ -7,7 +7,6 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 // Models
 use App\Models\Gallery\Video;
@@ -30,7 +29,7 @@ class VideoController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Video::query()->orderBy('created_at', 'desc');
+        $query = Video::query()->with(['group'])->orderBy('created_at', 'desc');
 
         if (isset($validated['group_id'])) {
             if ($validated['group_id'] === 0) {
@@ -93,9 +92,14 @@ class VideoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Video $video)
+    public function show(Video $video): View
     {
-        //
+        return view('pages.dashboard.admin.gallery.video.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'video' => $video->load(['group']),
+        ]);
     }
 
     /**
