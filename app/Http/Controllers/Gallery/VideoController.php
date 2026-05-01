@@ -148,8 +148,17 @@ class VideoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Video $video)
+    public function destroy(Video $video): RedirectResponse
     {
-        //
+        if ($video->file_path && Storage::disk('public')->exists($video->file_path)) {
+            Storage::disk('public')->delete($video->file_path);
+        }
+        if ($video->thumbnail_path && Storage::disk('public')->exists($video->thumbnail_path)) {
+            Storage::disk('public')->delete($video->thumbnail_path);
+        }
+
+        $video->delete();
+
+        return redirect()->route('dashboard.admin.gallery.videos.index')->with('success', 'Video deleted successfully.');
     }
 }
