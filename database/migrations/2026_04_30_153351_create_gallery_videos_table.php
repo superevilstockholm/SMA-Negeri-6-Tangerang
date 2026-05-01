@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gallery_videos', function (Blueprint $table) {
             $table->id();
-            $table->string('thumbnail_path');
+            $table->string('thumbnail_path')->nullable();
             $table->string('file_path');
             $table->foreignId('group_id')->nullable()->constrained('gallery_groups')->nullOnDelete();
             $table->timestamps();

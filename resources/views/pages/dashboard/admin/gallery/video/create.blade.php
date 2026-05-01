@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Create Image')
+@section('title', 'Create Video')
 @section('content')
     <div class="row mb-4">
         <div class="col">
@@ -7,11 +7,11 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Create Image</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Create a new image.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">Create Video</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">Create a new video.</p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.gallery.images.index') }}"
+                        <a href="{{ route('dashboard.admin.gallery.videos.index') }}"
                             class="btn btn-sm btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill m-0">
                             <i class="ti ti-arrow-left me-1"></i> Back to List
                         </a>
@@ -24,19 +24,22 @@
         <div class="col">
             <div class="card my-0">
                 <div class="card-body">
-                    <form action="{{ route('dashboard.admin.gallery.images.store') }}" autocomplete="off"
+                    <form action="{{ route('dashboard.admin.gallery.videos.store') }}" autocomplete="off"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <input type="file" name="image_file" id="imageInput" class="d-none @error('image_file') is-invalid @enderror" accept="image/*">
-                            <img src="{{ asset('static/img/no-image-palceholder.svg') }}" id="imagePreview" alt="Preview Image" class="w-100 h-100 rounded object-fit-cover border" style="max-width: 500px; max-height: 250px; object-position: center; cursor: pointer;">
-                            <div class="mt-2 text-muted small">
-                                Click on the image to choose file
+                            <input type="file" name="video_file" id="videoInput" class="d-none @error('video_file') is-invalid @enderror" accept="video/*">
+                            <div id="videoPreviewWrapper" class="border rounded overflow-hidden position-relative w-100" style="max-width:500px; height:250px; cursor:pointer;">
+                                <img src="{{ asset('static/img/no-image-palceholder.svg') }}" id="videoPlaceholder" class="w-100 h-100" style="object-fit:cover; object-position:center;">
+                                <video id="videoPreview" class="w-100 h-100 d-none" style="object-fit:cover; object-position:center;" controls playsinline></video>
                             </div>
-                            <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger mt-2 d-none">
-                                <i class="ti ti-trash me-1"></i> Remove Image
+                            <div class="mt-2 text-muted small">
+                                Click preview area to choose video
+                            </div>
+                            <button type="button" id="removeVideoBtn" class="btn btn-sm btn-danger mt-2 d-none">
+                                <i class="ti ti-trash me-1"></i> Remove Video
                             </button>
-                            @error('image_file')
+                            @error('video_file')
                                 <div class="text-danger small mt-2">
                                     {{ $message }}
                                 </div>
@@ -59,7 +62,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill">
-                                <i class="ti ti-device-floppy me-1"></i> Save Image
+                                <i class="ti ti-device-floppy me-1"></i> Save Video
                             </button>
                         </div>
                     </form>
@@ -71,26 +74,33 @@
 @push('js')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const imageInput = document.getElementById('imageInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const removeBtn = document.getElementById('removeImageBtn');
-    const placeholder = "{{ asset('static/img/no-image-palceholder.svg') }}";
-    imagePreview.addEventListener('click', function () {
-        imageInput.click();
+    const input = document.getElementById('videoInput');
+    const wrapper = document.getElementById('videoPreviewWrapper');
+    const placeholder = document.getElementById('videoPlaceholder');
+    const preview = document.getElementById('videoPreview');
+    const removeBtn = document.getElementById('removeVideoBtn');
+    wrapper.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'VIDEO') {
+            input.click();
+        }
     });
-    imageInput.addEventListener('change', function (event) {
-        const file = event.target.files[0];
+    input.addEventListener('change', function () {
+        const file = this.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            imagePreview.src = e.target.result;
-            removeBtn.classList.remove('d-none');
-        };
-        reader.readAsDataURL(file);
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.load();
+        preview.classList.remove('d-none');
+        placeholder.classList.add('d-none');
+        removeBtn.classList.remove('d-none');
     });
     removeBtn.addEventListener('click', function () {
-        imageInput.value = '';
-        imagePreview.src = placeholder;
+        input.value = '';
+        preview.pause();
+        preview.removeAttribute('src');
+        preview.load();
+        preview.classList.add('d-none');
+        placeholder.classList.remove('d-none');
         removeBtn.classList.add('d-none');
     });
 });
