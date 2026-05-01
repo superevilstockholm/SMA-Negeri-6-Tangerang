@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Image Management')
+@section('title', 'Video Management')
 @section('content')
     @php
         use Illuminate\Support\Str;
@@ -11,13 +11,13 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Image Records</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Manage image records.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">Video Records</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">Manage video records.</p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.gallery.images.create') }}"
+                        <a href="{{ route('dashboard.admin.gallery.videos.create') }}"
                             class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-plus me-1"></i> Create Image
+                            <i class="ti ti-plus me-1"></i> Create Video
                         </a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
         <div class="col">
             <div class="card my-0">
                 <div class="card-body">
-                    <form method="GET" action="{{ route('dashboard.admin.gallery.images.index') }}" id="filterForm">
+                    <form method="GET" action="{{ route('dashboard.admin.gallery.videos.index') }}" id="filterForm">
                         <div
                             class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-3 gap-2 gap-md-0">
                             <div class="d-flex align-items-center">
@@ -49,11 +49,11 @@
                                 <span class="ms-2">entries</span>
                             </div>
                             <div class="text-muted small">
-                                @if ($images instanceof LengthAwarePaginator)
-                                    Showing {{ $images->firstItem() }} to {{ $images->lastItem() }} of
-                                    {{ $images->total() }} entries
+                                @if ($videos instanceof LengthAwarePaginator)
+                                    Showing {{ $videos->firstItem() }} to {{ $videos->lastItem() }} of
+                                    {{ $videos->total() }} entries
                                 @else
-                                    Showing {{ $images->count() }} entries
+                                    Showing {{ $videos->count() }} entries
                                 @endif
                             </div>
                         </div>
@@ -102,39 +102,39 @@
                             </div>
                             {{-- Reset Buttons --}}
                             <div class="col-12 col-md-6">
-                                <a href="{{ route('dashboard.admin.gallery.images.index') }}"
+                                <a href="{{ route('dashboard.admin.gallery.videos.index') }}"
                                     class="btn btn-secondary w-100 d-flex align-items-center justify-content-center gap-2">
                                     <i class="ti ti-rotate-clockwise-2"></i> Reset Filters
                                 </a>
                             </div>
                         </div>
                     </form>
-                    <div class="table-responsive @if (!($images instanceof LengthAwarePaginator && $images->hasPages())) mb-0 @else mb-3 @endif">
+                    <div class="table-responsive @if (!($videos instanceof LengthAwarePaginator && $videos->hasPages())) mb-0 @else mb-3 @endif">
                         <table class="table table-striped table-hover align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Preview Image</th>
+                                    <th>Thumbnail</th>
                                     <th>Group Name</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($images as $index => $image)
+                                @forelse ($videos as $index => $video)
                                     <tr>
                                         <td class="text-center">
-                                            @if ($images instanceof LengthAwarePaginator)
-                                                {{ $images->firstItem() + $loop->index }}
+                                            @if ($videos instanceof LengthAwarePaginator)
+                                                {{ $videos->firstItem() + $loop->index }}
                                             @else
                                                 {{ $loop->iteration }}
                                             @endif
                                         </td>
                                         <td>
-                                            <img class="rounded object-fit-cover" style="width: 200px; height: 100px;" src="{{ $image->file_url }}" alt="{{ $image->group?->title ? ($image->group->title . ' Image') : ('Image ' . $image->id) }}">
+                                            <img class="rounded object-fit-cover" style="width: 200px; height: 100px;" src="{{ $video->thumbnail_url }}" alt="{{ $video->group?->title ? ($video->group->title . ' Video') : ('Video ' . $video->id) }}">
                                         </td>
-                                        <td>{{ $image->group?->title ?? '-' }}</td>
-                                        <td>{{ $image->created_at?->format('d M Y H:i') }}</td>
+                                        <td>{{ $video->group?->title ?? '-' }}</td>
+                                        <td>{{ $video->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">
                                                 <button type="button" class="btn border-0 p-0 dropdown-toggle hide-arrow"
@@ -143,20 +143,20 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.gallery.images.show', $image->id) }}">
+                                                        href="{{ route('dashboard.admin.gallery.videos.show', $video->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.gallery.images.edit', $image->id) }}">
+                                                        href="{{ route('dashboard.admin.gallery.videos.edit', $video->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
                                                     </a>
-                                                    <form id="form-delete-{{ $image->id }}"
-                                                        action="{{ route('dashboard.admin.gallery.images.destroy', $image->id) }}"
+                                                    <form id="form-delete-{{ $video->id }}"
+                                                        action="{{ route('dashboard.admin.gallery.videos.destroy', $video->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item d-flex align-items-center gap-2 text-danger btn-delete"
-                                                            data-id="{{ $image->id }}">
+                                                            data-id="{{ $video->id }}">
                                                             <i class="ti ti-trash me-1 text-danger"></i> Delete
                                                         </button>
                                                     </form>
@@ -168,7 +168,7 @@
                                     <tr>
                                         <td colspan="5" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
-                                                No image records found for the selected filters.
+                                                No video records found for the selected filters.
                                             </div>
                                         </td>
                                     </tr>
@@ -176,10 +176,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($images instanceof LengthAwarePaginator && $images->hasPages())
+                    @if ($videos instanceof LengthAwarePaginator && $videos->hasPages())
                         <div class="overflow-x-auto mt-0 py-1">
                             <div class="d-flex justify-content-center d-md-block w-100 px-3">
-                                {{ $images->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+                                {{ $videos->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     @endif
@@ -193,10 +193,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.btn-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const imageId = this.getAttribute('data-id');
+                    const videoId = this.getAttribute('data-id');
                     Swal.fire({
-                        title: "Delete Image",
-                        text: "Are you sure you want to delete the image? This action cannot be undone.",
+                        title: "Delete Video",
+                        text: "Are you sure you want to delete the video? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#d33",
@@ -205,7 +205,7 @@
                         cancelButtonText: "Cancel"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            document.getElementById('form-delete-' + imageId).submit();
+                            document.getElementById('form-delete-' + videoId).submit();
                         }
                     });
                 });

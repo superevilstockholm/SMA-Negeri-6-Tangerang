@@ -78,28 +78,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');
     const removeBtn = document.getElementById('removeImageBtn');
-
     const originalImage = "{{ asset($image->file_url) }}";
-
     imagePreview.addEventListener('click', function () {
         imageInput.click();
     });
-
     imageInput.addEventListener('change', function (event) {
         const file = event.target.files[0];
-
         if (!file) return;
-
         const reader = new FileReader();
-
         reader.onload = function (e) {
             imagePreview.src = e.target.result;
             removeBtn.classList.remove('d-none');
         };
-
         reader.readAsDataURL(file);
     });
-
     removeBtn.addEventListener('click', function () {
         imageInput.value = '';
         imagePreview.src = originalImage;
