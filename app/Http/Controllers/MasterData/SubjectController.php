@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\MasterData\Subject;
 
 // Requests
 use App\Http\Requests\MasterData\Subject\IndexRequest;
+use App\Http\Requests\MasterData\Subject\StoreRequest;
 
 class SubjectController extends Controller
 {
@@ -48,25 +50,25 @@ class SubjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.subject.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
-    }
+        $validated = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Subject $subject)
-    {
-        //
+        Subject::create($validated);
+
+        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject created successfully.');
     }
 
     /**
