@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
                 ])->only(['index', 'show', 'destroy']);
                 Route::resource('subjects', SubjectController::class)->parameters([
                     'subjects' => 'subject',
-                ])->except(['show']);
+                ]);
                 Route::resource('classrooms', ClassroomController::class)->parameters([
                     'classrooms' => 'classroom',
                 ]);

@@ -72,6 +72,19 @@ class SubjectController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Subject $subject): View
+    {
+        return view('pages.dashboard.admin.master-data.subject.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'subject' => $subject,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Subject $subject): View
