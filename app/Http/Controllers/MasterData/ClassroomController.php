@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
@@ -14,6 +13,7 @@ use App\Models\MasterData\Classroom;
 // Requests
 use App\Http\Requests\MasterData\Classroom\IndexRequest;
 use App\Http\Requests\MasterData\Classroom\StoreRequest;
+use App\Http\Requests\MasterData\Classroom\UpdateRequest;
 
 class ClassroomController extends Controller
 {
@@ -87,17 +87,26 @@ class ClassroomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Classroom $classroom)
+    public function edit(Classroom $classroom): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.classroom.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'classroom' => $classroom,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classroom $classroom)
+    public function update(UpdateRequest $request, Classroom $classroom): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $classroom->update($validated);
+
+        return redirect()->route('dashboard.admin.master-data.classrooms.index')->with('success', 'Classroom updated successfully.');
     }
 
     /**
