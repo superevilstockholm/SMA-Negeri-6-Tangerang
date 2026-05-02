@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 // Models
 use App\Models\MasterData\Classroom;
 
 // Requests
 use App\Http\Requests\MasterData\Classroom\IndexRequest;
+use App\Http\Requests\MasterData\Classroom\StoreRequest;
 
 class ClassroomController extends Controller
 {
@@ -48,17 +50,25 @@ class ClassroomController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.classroom.create', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        Classroom::create($validated);
+
+        return redirect()->route('dashboard.admin.master-data.classrooms.index')->with('success', 'Classroom created successfully.');
     }
 
     /**

@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
                 ])->except(['show']);
                 Route::resource('classrooms', ClassroomController::class)->parameters([
                     'classrooms' => 'classroom',
-                ])->except(['show']);
+                ]);
             });
             // Gallery
             Route::prefix('gallery')->name('gallery.')->group(function () {
