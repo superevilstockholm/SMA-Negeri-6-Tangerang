@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MasterData\VisionController;
 use App\Http\Controllers\MasterData\MissionController;
 use App\Http\Controllers\MasterData\ContactController;
+use App\Http\Controllers\MasterData\SubjectController;
 use App\Http\Controllers\MasterData\SchoolHistoryController;
 
 // Gallery Controllers
@@ -68,6 +69,9 @@ Route::middleware('auth')->group(function () {
                 Route::resource('contacts', ContactController::class)->parameters([
                     'contacts' => 'contact',
                 ])->only(['index', 'show', 'destroy']);
+                Route::resource('subjects', SubjectController::class)->parameters([
+                    'subjects' => 'subject',
+                ])->except(['show']);
             });
             // Gallery
             Route::prefix('gallery')->name('gallery.')->group(function () {
