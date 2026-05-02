@@ -14,6 +14,7 @@ use App\Enums\GenderEnum;
 
 // Models
 use App\Models\MasterData\User;
+use App\Models\MasterData\Classroom;
 
 #[Fillable(['name', 'nip', 'dob', 'gender', 'photo_path', 'user_id'])]
 #[Appends(['photo_url'])]
@@ -34,6 +35,11 @@ class Teacher extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function homeroomClassroom()
+    {
+        return $this->hasOne(Classroom::class, 'homeroom_teacher_id');
     }
 
     public function getPhotoUrlAttribute(): string
