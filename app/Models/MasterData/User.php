@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 // Enums
 use App\Enums\RoleEnum;
 
+// Models
+use App\Models\MasterData\Teacher;
+
 #[Fillable(['email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -32,5 +35,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => RoleEnum::class,
         ];
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
     }
 }

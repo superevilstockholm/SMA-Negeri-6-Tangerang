@@ -36,6 +36,21 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-floating mb-3">
+                            <select name="homeroom_teacher_id" id="floatingInputHomeroomTeacherId"
+                                class="form-select @error('homeroom_teacher_id') is-invalid @enderror">
+                                <option value="" {{ old('homeroom_teacher_id', $classroom->homeroom_teacher_id) ? '' : 'selected' }}>Without Homeroom Teacher</option>
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}" {{ old('homeroom_teacher_id', $classroom->homeroom_teacher_id) == $teacher->id ? 'selected' : '' }}>
+                                        {{ $teacher->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="floatingInputHomeroomTeacherId">Select Homeroom Teacher</label>
+                            @error('homeroom_teacher_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill">
                                 <i class="ti ti-device-floppy me-1"></i> Update Classroom

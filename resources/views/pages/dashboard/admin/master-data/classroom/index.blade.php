@@ -103,6 +103,7 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Name</th>
+                                    <th>Homeroom Teacher</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -118,6 +119,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $classroom->name ?? '-' }}</td>
+                                        <td>{{ $classroom->homeroomTeacher?->name ?? '-' }}</td>
                                         <td>{{ $classroom->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">
@@ -151,7 +153,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center">
+                                        <td colspan="5" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
                                                 No classroom records found for the selected filters.
                                             </div>

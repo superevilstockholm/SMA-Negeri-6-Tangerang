@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'unique:classrooms,name,' . $this->classroom->id],
+            'homeroom_teacher_id' => ['nullable', 'integer', 'unique:classrooms,homeroom_teacher_id,' . $this->classroom->id, 'exists:teachers,id'],
         ];
     }
 }

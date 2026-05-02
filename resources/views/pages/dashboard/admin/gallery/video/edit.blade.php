@@ -49,7 +49,7 @@
                             @enderror
                         </div>
                         <div class="form-floating mb-3">
-                            <select name="group_id" id="floatingInputOrder" class="form-select @error('group_id') is-invalid @enderror">
+                            <select name="group_id" id="floatingInputGroup" class="form-select @error('group_id') is-invalid @enderror">
                                 <option value="" {{ old('group_id', $video->group_id) === null ? 'selected' : '' }}>
                                     Without Group
                                 </option>
@@ -59,7 +59,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="floatingInputOrder">Select Group</label>
+                            <label for="floatingInputGroup">Select Group</label>
                             @error('group_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}

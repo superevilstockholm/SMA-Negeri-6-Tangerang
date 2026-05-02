@@ -23,6 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'unique:classrooms,name'],
+            'homeroom_teacher_id' => ['nullable', 'integer', 'unique:classrooms,homeroom_teacher_id', 'exists:teachers,id'],
         ];
     }
 }
