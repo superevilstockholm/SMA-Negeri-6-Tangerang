@@ -2,7 +2,6 @@
 @section('title', 'Subject Management')
 @section('content')
     @php
-        use Illuminate\Support\Str;
         use Illuminate\Contracts\Pagination\LengthAwarePaginator;
     @endphp
     <div class="row mb-4">

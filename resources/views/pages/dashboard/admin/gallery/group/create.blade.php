@@ -28,7 +28,7 @@
                         method="POST">
                         @csrf
                         <div class="form-floating mb-3">
-                            <input name="title" class="form-control @error('title') is-invalid @enderror" id="floatingInputTitle"
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="floatingInputTitle"
                                 placeholder="Title" autocomplete="off" value="{{ old('title') }}" autofocus required>
                             <label for="floatingInputTitle">Title <span class="text-danger">*</span></label>
                             @error('title')
