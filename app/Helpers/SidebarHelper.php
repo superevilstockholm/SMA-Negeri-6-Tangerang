@@ -13,6 +13,7 @@ if (!function_exists('adminSidebarItems')) {
                 ['label' => 'school histories', 'icon' => 'ti ti-timeline-event', 'route' => 'dashboard.admin.master-data.school-histories.index', 'activePattern' => 'dashboard.admin.master-data.school-histories.*'],
                 ['label' => 'contacts', 'icon' => 'ti ti-message-2-share', 'route' => 'dashboard.admin.master-data.contacts.index', 'activePattern' => 'dashboard.admin.master-data.contacts.*'],
                 ['label' => 'subjects', 'icon' => 'ti ti-book', 'route' => 'dashboard.admin.master-data.subjects.index', 'activePattern' => 'dashboard.admin.master-data.subjects.*'],
+                ['label' => 'classrooms', 'icon' => 'ti ti-chalkboard', 'route' => 'dashboard.admin.master-data.classrooms.index', 'activePattern' => 'dashboard.admin.master-data.classrooms.*'],
             ],
             'gallery' => [
                 ['label' => 'groups', 'icon' => 'ti ti-folders', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],

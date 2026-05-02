@@ -8,14 +8,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
 // Models
-use App\Models\MasterData\Subject;
+use App\Models\MasterData\Classroom;
 
 // Requests
-use App\Http\Requests\MasterData\Subject\IndexRequest;
-use App\Http\Requests\MasterData\Subject\StoreRequest;
-use App\Http\Requests\MasterData\Subject\UpdateRequest;
+use App\Http\Requests\MasterData\Classroom\IndexRequest;
+use App\Http\Requests\MasterData\Classroom\StoreRequest;
+use App\Http\Requests\MasterData\Classroom\UpdateRequest;
 
-class SubjectController extends Controller
+class ClassroomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class SubjectController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Subject::query()->orderBy('created_at', 'asc');
+        $query = Classroom::query()->orderBy('created_at', 'asc');
 
         if (isset($validated['name'])) {
             $query->where('name', 'ILIKE', '%' . $validated['name'] . '%');
@@ -37,13 +37,13 @@ class SubjectController extends Controller
             $query->where('created_at', '<=', Carbon::parse($validated['end_date'])->endOfDay());
         }
 
-        $subjects = $query->paginate($limit)->appends($request->except('page'));
+        $classrooms = $query->paginate($limit)->appends($request->except('page'));
 
-        return view('pages.dashboard.admin.master-data.subject.index', [
+        return view('pages.dashboard.admin.master-data.classroom.index', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'subjects' => $subjects,
+            'classrooms' => $classrooms,
         ]);
     }
 
@@ -52,7 +52,7 @@ class SubjectController extends Controller
      */
     public function create(): View
     {
-        return view('pages.dashboard.admin.master-data.subject.create', [
+        return view('pages.dashboard.admin.master-data.classroom.create', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
@@ -66,56 +66,56 @@ class SubjectController extends Controller
     {
         $validated = $request->validated();
 
-        Subject::create($validated);
+        Classroom::create($validated);
 
-        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject created successfully.');
+        return redirect()->route('dashboard.admin.master-data.classrooms.index')->with('success', 'Classroom created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Subject $subject): View
+    public function show(Classroom $classroom): View
     {
-        return view('pages.dashboard.admin.master-data.subject.show', [
+        return view('pages.dashboard.admin.master-data.classroom.show', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'subject' => $subject,
+            'classroom' => $classroom,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subject $subject): View
+    public function edit(Classroom $classroom): View
     {
-        return view('pages.dashboard.admin.master-data.subject.edit', [
+        return view('pages.dashboard.admin.master-data.classroom.edit', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'subject' => $subject,
+            'classroom' => $classroom,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Subject $subject): RedirectResponse
+    public function update(UpdateRequest $request, Classroom $classroom): RedirectResponse
     {
         $validated = $request->validated();
 
-        $subject->update($validated);
+        $classroom->update($validated);
 
-        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject updated successfully.');
+        return redirect()->route('dashboard.admin.master-data.classrooms.index')->with('success', 'Classroom updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subject $subject): RedirectResponse
+    public function destroy(Classroom $classroom): RedirectResponse
     {
-        $subject->delete();
+        $classroom->delete();
 
-        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject deleted successfully.');
+        return redirect()->route('dashboard.admin.master-data.classrooms.index')->with('success', 'Classroom deleted successfully.');
     }
 }
