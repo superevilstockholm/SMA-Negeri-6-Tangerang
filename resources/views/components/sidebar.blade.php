@@ -5,7 +5,7 @@
                 <img height="50" src="{{ asset('static/img/logo-sman6tng.png') }}" alt="Logo {{ config('app.name') }}">
             </a>
         </div>
-        <div class="navbar-content">
+        <div class="navbar-content" data-lenis-prevent>
             <ul class="pc-navbar">
                 @foreach ($meta['sidebarItems'] as $key => $item)
                     <li class="pc-item pc-caption">
