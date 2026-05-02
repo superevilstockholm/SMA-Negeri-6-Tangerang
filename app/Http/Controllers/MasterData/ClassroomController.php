@@ -92,11 +92,13 @@ class ClassroomController extends Controller
      */
     public function edit(Classroom $classroom): View
     {
+        $teachers = Teacher::whereDoesntHave('homeroomClassroom')->orWhere('id', $classroom->homeroom_teacher_id)->orderBy('name')->get();
         return view('pages.dashboard.admin.master-data.classroom.edit', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
             'classroom' => $classroom,
+            'teachers' => $teachers,
         ]);
     }
 
