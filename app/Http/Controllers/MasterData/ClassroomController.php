@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
 // Models
+use App\Models\MasterData\Teacher;
 use App\Models\MasterData\Classroom;
 
 // Requests
@@ -25,7 +26,7 @@ class ClassroomController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Classroom::query()->orderBy('created_at', 'asc');
+        $query = Classroom::query()->with(['homeroomTeacher'])->orderBy('created_at', 'asc');
 
         if (isset($validated['name'])) {
             $query->where('name', 'ILIKE', '%' . $validated['name'] . '%');
@@ -52,10 +53,12 @@ class ClassroomController extends Controller
      */
     public function create(): View
     {
+        $teachers = Teacher::whereDoesntHave('homeroomClassroom')->orderBy('name')->get();
         return view('pages.dashboard.admin.master-data.classroom.create', [
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
+            'teachers' => $teachers,
         ]);
     }
 
@@ -80,7 +83,7 @@ class ClassroomController extends Controller
             'meta' => [
                 'sidebarItems' => adminSidebarItems(),
             ],
-            'classroom' => $classroom,
+            'classroom' => $classroom->load(['homeroomTeacher']),
         ]);
     }
 

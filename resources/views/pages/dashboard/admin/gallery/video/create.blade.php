@@ -46,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="form-floating mb-3">
-                            <select name="group_id" id="floatingInputOrder"
+                            <select name="group_id" id="floatingInputGroup"
                                 class="form-select @error('group_id') is-invalid @enderror">
                                 <option value="" {{ old('group_id') ? '' : 'selected' }}>Without Group</option>
                                 @foreach ($groups as $group)
@@ -55,7 +55,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="floatingInputOrder">Select Group</label>
+                            <label for="floatingInputGroup">Select Group</label>
                             @error('group_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

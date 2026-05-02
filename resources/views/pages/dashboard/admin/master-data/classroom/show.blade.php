@@ -30,6 +30,10 @@
                         <div class="col-md-4 text-muted">Name</div>
                         <div class="col-md-8 fw-medium">{{ $classroom->name ?? '-' }}</div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 text-muted">Homeroom Teacher</div>
+                        <div class="col-md-8 fw-medium">{{ $classroom->homeroomTeacher?->name ?? '-' }}</div>
+                    </div>
                     <h4 class="card-title fw-semibold mt-4 mb-3">System Information</h4>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Classroom ID</div>
