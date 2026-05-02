@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
@@ -14,6 +13,7 @@ use App\Models\MasterData\Subject;
 // Requests
 use App\Http\Requests\MasterData\Subject\IndexRequest;
 use App\Http\Requests\MasterData\Subject\StoreRequest;
+use App\Http\Requests\MasterData\Subject\UpdateRequest;
 
 class SubjectController extends Controller
 {
@@ -74,17 +74,26 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subject $subject)
+    public function edit(Subject $subject): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.subject.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'subject' => $subject,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subject $subject)
+    public function update(UpdateRequest $request, Subject $subject): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $subject->update($validated);
+
+        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject updated successfully.');
     }
 
     /**
