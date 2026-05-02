@@ -27,8 +27,8 @@ class SubjectController extends Controller
 
         $query = Subject::query()->orderBy('created_at', 'asc');
 
-        if (isset($validated['content'])) {
-            $query->where('content', 'ILIKE', '%' . $validated['content'] . '%');
+        if (isset($validated['name'])) {
+            $query->where('name', 'ILIKE', '%' . $validated['name'] . '%');
         }
         if (isset($validated['start_date'])) {
             $query->where('created_at', '>=', Carbon::parse($validated['start_date'])->startOfDay());
