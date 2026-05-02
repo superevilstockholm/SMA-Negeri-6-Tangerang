@@ -127,6 +127,10 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
+                                                        href="{{ route('dashboard.admin.master-data.subjects.show', $subject->id) }}">
+                                                        <i class="ti ti-eye me-1"></i> View Details
+                                                    </a>
+                                                    <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.subjects.edit', $subject->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
                                                     </a>
