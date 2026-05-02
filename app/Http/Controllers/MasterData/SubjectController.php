@@ -99,8 +99,10 @@ class SubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subject $subject)
+    public function destroy(Subject $subject): RedirectResponse
     {
-        //
+        $subject->delete();
+
+        return redirect()->route('dashboard.admin.master-data.subjects.index')->with('success', 'Subject deleted successfully.');
     }
 }
