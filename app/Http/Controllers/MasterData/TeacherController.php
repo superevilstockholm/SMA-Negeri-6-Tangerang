@@ -148,8 +148,14 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(Teacher $teacher): RedirectResponse
     {
-        //
+        if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
+            Storage::disk('public')->delete($teacher->photo_path);
+        }
+        
+        $teacher->delete();
+
+        return redirect()->route('dashboard.admin.master-data.teachers.index')->with('success', 'Teacher deleted successfully.');
     }
 }
