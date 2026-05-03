@@ -25,7 +25,7 @@ class TeacherController extends Controller
         $validated = $request->validated();
         $limit = $validated['limit'] ?? 10;
 
-        $query = Teacher::query()->orderBy('created_at', 'desc');
+        $query = Teacher::query()->with(['user', 'homeroomClassroom'])->orderBy('created_at', 'desc');
 
         if (isset($validated['name'])) {
             $query->where('name', 'ILIKE', '%' . $validated['name'] . '%');
@@ -95,9 +95,14 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Teacher $teacher)
+    public function show(Teacher $teacher): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.teacher.show', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'teacher' => $teacher->load(['user', 'homeroomClassroom']),
+        ]);
     }
 
     /**
