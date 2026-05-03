@@ -4,9 +4,9 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 // Models
 use App\Models\MasterData\Teacher;
@@ -14,6 +14,7 @@ use App\Models\MasterData\Teacher;
 // Requests
 use App\Http\Requests\MasterData\Teacher\IndexRequest;
 use App\Http\Requests\MasterData\Teacher\StoreRequest;
+use App\Http\Requests\MasterData\Teacher\UpdateRequest;
 
 class TeacherController extends Controller
 {
@@ -108,17 +109,40 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit(Teacher $teacher): View
     {
-        //
+        return view('pages.dashboard.admin.master-data.teacher.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'teacher' => $teacher,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(UpdateRequest $request, Teacher $teacher): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->boolean('remove_photo')) {
+            if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
+                Storage::disk('public')->delete($teacher->photo_path);
+            }
+            $validated['photo_path'] = null;
+        }
+
+        if ($request->hasFile('profile_file')) {
+            if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
+                Storage::disk('public')->delete($teacher->photo_path);
+            }
+            $validated['photo_path'] = $request->file('profile_file')->store('master-data/teachers/profile', 'public');
+        }
+
+        $teacher->update($validated);
+
+        return redirect()->route('dashboard.admin.master-data.teachers.index')->with('success', 'Teacher updated successfully.');
     }
 
     /**
