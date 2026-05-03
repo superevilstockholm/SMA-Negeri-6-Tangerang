@@ -10,6 +10,7 @@ use App\Http\Controllers\MasterData\VisionController;
 use App\Http\Controllers\MasterData\MissionController;
 use App\Http\Controllers\MasterData\ContactController;
 use App\Http\Controllers\MasterData\SubjectController;
+use App\Http\Controllers\MasterData\TeacherController;
 use App\Http\Controllers\MasterData\ClassroomController;
 use App\Http\Controllers\MasterData\SchoolHistoryController;
 
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
                 ]);
                 Route::resource('classrooms', ClassroomController::class)->parameters([
                     'classrooms' => 'classroom',
+                ]);
+                Route::resource('teachers', TeacherController::class)->parameters([
+                    'teachers' => 'teacher',
                 ]);
             });
             // Gallery

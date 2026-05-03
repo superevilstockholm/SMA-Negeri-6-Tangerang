@@ -28,6 +28,7 @@ class Teacher extends Model
     protected function casts(): array
     {
         return [
+            'dob' => 'date',
             'gender' => GenderEnum::class,
         ];
     }
