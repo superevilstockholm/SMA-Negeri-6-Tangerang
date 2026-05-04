@@ -77,12 +77,12 @@
                                 </option>
                                 @foreach (GenderEnum::cases() as $gender)
                                     <option value="{{ $gender->value }}"
-                                        {{ old('gender', $teacher->gender) == $gender->value ? 'selected' : '' }}>
+                                        {{ old('gender', $teacher->gender->value) == $gender->value ? 'selected' : '' }}>
                                         {{ ucfirst(strtolower($gender->value)) }}
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="floatingInputGender">Gender</label>
+                            <label for="floatingInputGender">Gender <span class="text-danger">*</span></label>
                             @error('gender')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

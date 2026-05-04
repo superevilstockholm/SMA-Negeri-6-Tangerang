@@ -81,7 +81,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="floatingInputGender">Gender</label>
+                            <label for="floatingInputGender">Gender <span class="text-danger">*</span></label>
                             @error('gender')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

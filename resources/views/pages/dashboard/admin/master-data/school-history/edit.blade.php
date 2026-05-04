@@ -31,7 +31,7 @@
                         <div class="form-floating mb-3">
                             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="floatingInputTitle"
                                 placeholder="Title" autocomplete="off" value="{{ old('title', $schoolHistory->title) }}" required>
-                            <label for="floatingInputTitle">Title</label>
+                            <label for="floatingInputTitle">Title <span class="text-danger">*</span></label>
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -39,7 +39,7 @@
                         <div class="form-floating mb-3">
                             <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="floatingInputDescription"
                                 placeholder="Description" autocomplete="off" required data-lenis-prevent>{{ old('description', $schoolHistory->description) }}</textarea>
-                            <label for="floatingInputDescription">Description</label>
+                            <label for="floatingInputDescription">Description <span class="text-danger">*</span></label>
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -47,7 +47,7 @@
                         <div class="form-floating mb-3">
                             <input type="text" name="start_year" class="form-control @error('start_year') is-invalid @enderror" id="floatingInputStartYear"
                                 placeholder="Start Year" autocomplete="off" value="{{ old('start_year', $schoolHistory->start_year) }}" required>
-                            <label for="floatingInputStartYear">Start Year</label>
+                            <label for="floatingInputStartYear">Start Year <span class="text-danger">*</span></label>
                             @error('start_year')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -72,7 +72,7 @@
                                     </option>
                                 @endfor
                             </select>
-                            <label for="floatingInputOrder">Display Order</label>
+                            <label for="floatingInputOrder">Display Order <span class="text-danger">*</span></label>
                             @error('order')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
