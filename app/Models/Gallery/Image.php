@@ -23,7 +23,7 @@ class Image extends Model
         /** @disregard */
         return $this->file_path
             ? Storage::disk('public')->url($this->file_path)
-            : asset('static/img/no-image-palceholder.svg');
+            : asset('static/img/no-image-placeholder.svg');
     }
 
     public function group()

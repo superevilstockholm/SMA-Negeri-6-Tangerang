@@ -48,6 +48,6 @@ class Teacher extends Model
         /** @disregard */
         return $this->photo_path
             ? Storage::disk('public')->url($this->photo_path)
-            : asset('static/img/no-image-palceholder.svg');
+            : asset('static/img/no-image-placeholder.svg');
     }
 }
