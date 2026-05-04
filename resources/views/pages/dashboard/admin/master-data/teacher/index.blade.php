@@ -166,7 +166,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <img class="rounded object-fit-cover" style="width: 100px; height: 100px;" src="{{ $teacher->photo_url }}" alt="{{ $teacher->name }}">
+                                            <img class="rounded object-fit-cover" style="width: 100px; height: 100px;" src="{{ $teacher->photo_url }}" alt="{{ $teacher->name ? ucwords(strtolower($teacher->name)) . ' Photo' : 'Teacher Photo ' . $teacher->id }}">
                                         </td>
                                         <td>{{ $teacher->name ? ucwords(strtolower($teacher->name)) : '-' }}</td>
                                         <td>{{ $teacher->nip ?? '-' }}</td>

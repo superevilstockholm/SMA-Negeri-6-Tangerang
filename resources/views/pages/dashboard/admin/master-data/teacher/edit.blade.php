@@ -32,13 +32,13 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <input type="file" name="photo_file" id="imageInput" class="d-none @error('photo_file') is-invalid @enderror" accept="teacher/*">
-                            <img src="{{ $teacher->photo_url ? asset($teacher->photo_url) : asset('static/img/no-image-placeholder.svg') }}" id="imagePreview" alt="Preview Teacher" class="rounded object-fit-cover border" style="width: 200px; height: 200px; object-position: center; cursor: pointer;">
+                            <input type="file" name="photo_file" id="imageInput" class="d-none @error('photo_file') is-invalid @enderror" accept="image/*">
+                            <img src="{{ $teacher->photo_url ?? asset('static/img/no-image-placeholder.svg') }}" id="imagePreview" alt="Preview Teacher" class="rounded object-fit-cover border" style="width: 200px; height: 200px; object-position: center; cursor: pointer;">
                             <div class="mt-2 text-muted small">
                                 Click on the image to choose file
                             </div>
                             <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger mt-2 d-none">
-                                <i class="ti ti-trash me-1"></i> Remove Teacher
+                                <i class="ti ti-trash me-1"></i> Remove Photo
                             </button>
                             @error('photo_file')
                                 <div class="text-danger small mt-2">
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');
     const removeBtn = document.getElementById('removeImageBtn');
-    const originalImage = "{{ $teacher->photo_url ? asset($teacher->photo_url) : asset('static/img/no-image-placeholder.svg') }}";
+    const originalImage = "{{ $teacher->photo_url ?? asset('static/img/no-image-placeholder.svg') }}";
     imagePreview.addEventListener('click', function () {
         imageInput.click();
     });

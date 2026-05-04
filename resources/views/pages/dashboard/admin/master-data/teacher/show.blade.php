@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Image Details')
+@section('title', 'Teacher Details')
 @section('content')
     <x-alerts :errors="$errors" />
     <div class="row mb-4">
@@ -9,7 +9,7 @@
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
                         <h3 class="p-0 m-0 mb-1 fw-semibold">Teacher Details</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">View detailed information about this image.</p>
+                        <p class="p-0 m-0 fw-medium text-muted">View detailed information about this teacher.</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('dashboard.admin.master-data.teachers.index') }}"
@@ -28,12 +28,12 @@
                     <h4 class="card-title fw-semibold mb-3">Teacher Details</h4>
                     <div class="row mb-3">
                         <div class="col-12 fw-medium">
-                            <img src="{{ $teacher->photo_url }}" alt="{{ ($teacher->name . ' Image') ?? ('Image ' . $teacher->id) }}" class="rounded object-fit-cover border" style="width: 200px; height: 200px; object-position: center;">
+                            <img src="{{ $teacher->photo_url }}" alt="{{ $teacher->name ? ucwords(strtolower($teacher->name)) . ' Photo' : 'Teacher Photo ' . $teacher->id }}" class="rounded object-fit-cover border" style="width: 200px; height: 200px; object-position: center;">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Name</div>
-                        <div class="col-md-8 fw-medium">{{ $teacher->name ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $teacher->name ? ucwords(strtolower($teacher->name)) : '-' }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">NIP</div>
@@ -41,11 +41,11 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Birth Date</div>
-                        <div class="col-md-8 fw-medium">{{ $teacher->dob->format('l, d M Y') ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $teacher->dob?->format('d M Y') ?? '-' }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Gender</div>
-                        <div class="col-md-8 fw-medium">{{ $teacher->gender->label() ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $teacher->gender?->label() ?? '-' }}</div>
                     </div>
                     <h4 class="card-title fw-semibold mt-4 mb-3">System Information</h4>
                     <div class="row mb-3">
@@ -82,7 +82,7 @@
                     <hr class="my-4">
                     <h4 class="card-title fw-semibold mb-3">Notes</h4>
                     <p class="text-muted small">
-                        This page displays detailed information about the selected image. To make changes, click the "Edit Teacher" button.
+                        This page displays detailed information about the selected teacher. To make changes, click the "Edit Teacher" button.
                     </p>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                     const teacherId = this.getAttribute('data-id');
                     const teacherName = this.getAttribute('data-name');
                     Swal.fire({
-                        title: "Delete Subject",
+                        title: "Delete Teacher",
                         text: "Are you sure you want to delete the following teacher: \"" + teacherName +
                             "\"? This action cannot be undone.",
                         icon: "warning",
