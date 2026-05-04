@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'nip' => ['required', 'string', 'size:18', 'unique:teachers,nip'],
+            'nip' => ['required', 'string', 'size:18', 'unique:teachers,nip,' . $this->teacher->id],
             'dob' => ['required', 'date'],
             'gender' => ['required', Rule::enum(GenderEnum::class)],
             'photo_file' => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],

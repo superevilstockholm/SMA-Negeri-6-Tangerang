@@ -133,11 +133,11 @@ class TeacherController extends Controller
             $validated['photo_path'] = null;
         }
 
-        if ($request->hasFile('profile_file')) {
+        if ($request->hasFile('photo_file')) {
             if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
                 Storage::disk('public')->delete($teacher->photo_path);
             }
-            $validated['photo_path'] = $request->file('profile_file')->store('master-data/teachers/profile', 'public');
+            $validated['photo_path'] = $request->file('photo_file')->store('master-data/teachers/profile', 'public');
         }
 
         $teacher->update($validated);
