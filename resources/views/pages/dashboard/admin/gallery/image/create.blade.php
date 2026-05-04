@@ -29,7 +29,7 @@
                         @csrf
                         <div class="mb-3">
                             <input type="file" name="image_file" id="imageInput" class="d-none @error('image_file') is-invalid @enderror" accept="image/*">
-                            <img src="{{ asset('static/img/no-image-palceholder.svg') }}" id="imagePreview" alt="Preview Image" class="w-100 h-100 rounded object-fit-cover border" style="max-width: 500px; max-height: 250px; object-position: center; cursor: pointer;">
+                            <img src="{{ asset('static/img/no-image-placeholder.svg') }}" id="imagePreview" alt="Preview Image" class="w-100 h-100 rounded object-fit-cover border" style="max-width: 500px; max-height: 250px; object-position: center; cursor: pointer;">
                             <div class="mt-2 text-muted small">
                                 Click on the image to choose file
                             </div>
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');
     const removeBtn = document.getElementById('removeImageBtn');
-    const placeholder = "{{ asset('static/img/no-image-palceholder.svg') }}";
+    const placeholder = "{{ asset('static/img/no-image-placeholder.svg') }}";
     imagePreview.addEventListener('click', function () {
         imageInput.click();
     });

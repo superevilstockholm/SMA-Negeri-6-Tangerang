@@ -30,7 +30,7 @@
                         <div class="mb-3">
                             <input type="file" name="video_file" id="videoInput" class="d-none @error('video_file') is-invalid @enderror" accept="video/*">
                             <div id="videoPreviewWrapper" class="border rounded overflow-hidden position-relative w-100" style="max-width:500px; height:250px; cursor:pointer;">
-                                <img src="{{ asset('static/img/no-image-palceholder.svg') }}" id="videoPlaceholder" class="w-100 h-100" style="object-fit:cover; object-position:center;">
+                                <img src="{{ asset('static/img/no-image-placeholder.svg') }}" id="videoPlaceholder" class="w-100 h-100" style="object-fit:cover; object-position:center;">
                                 <video id="videoPreview" class="w-100 h-100 d-none" style="object-fit:cover; object-position:center;" controls playsinline></video>
                             </div>
                             <div class="mt-2 text-muted small">

@@ -84,8 +84,8 @@ class TeacherController extends Controller
     {
         $validated = $request->validated();
 
-        if ($request->hasFile('profile_file')) {
-            $validated['photo_path'] = $request->file('profile_file')->store('master-data/teachers/profile', 'public');
+        if ($request->hasFile('photo_file')) {
+            $validated['photo_path'] = $request->file('photo_file')->store('master-data/teachers/profile', 'public');
         }
 
         Teacher::create($validated);
@@ -133,11 +133,11 @@ class TeacherController extends Controller
             $validated['photo_path'] = null;
         }
 
-        if ($request->hasFile('profile_file')) {
+        if ($request->hasFile('photo_file')) {
             if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
                 Storage::disk('public')->delete($teacher->photo_path);
             }
-            $validated['photo_path'] = $request->file('profile_file')->store('master-data/teachers/profile', 'public');
+            $validated['photo_path'] = $request->file('photo_file')->store('master-data/teachers/profile', 'public');
         }
 
         $teacher->update($validated);
@@ -153,7 +153,7 @@ class TeacherController extends Controller
         if ($teacher->photo_path && Storage::disk('public')->exists($teacher->photo_path)) {
             Storage::disk('public')->delete($teacher->photo_path);
         }
-        
+
         $teacher->delete();
 
         return redirect()->route('dashboard.admin.master-data.teachers.index')->with('success', 'Teacher deleted successfully.');

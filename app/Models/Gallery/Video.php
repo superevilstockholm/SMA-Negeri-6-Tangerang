@@ -23,7 +23,7 @@ class Video extends Model
         /** @disregard */
         return $this->thumbnail_path
             ? Storage::disk('public')->url($this->thumbnail_path)
-            : asset('static/img/no-image-palceholder.svg');
+            : asset('static/img/no-image-placeholder.svg');
     }
 
     public function getFileUrlAttribute(): string
