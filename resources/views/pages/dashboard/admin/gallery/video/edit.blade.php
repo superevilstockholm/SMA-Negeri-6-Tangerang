@@ -30,7 +30,7 @@
                         @method('PUT')
                         <div class="mb-3">
                             <div id="videoPreviewWrapper" class="border rounded overflow-hidden position-relative w-100 mb-3" style="max-width:500px; height:250px;">
-                                <img src="{{ asset('static/img/no-image-palceholder.svg') }}" id="videoPlaceholder" class="w-100 h-100 d-none" style="object-fit:cover; object-position:center;">
+                                <img src="{{ asset('static/img/no-image-placeholder.svg') }}" id="videoPlaceholder" class="w-100 h-100 d-none" style="object-fit:cover; object-position:center;">
                                 <video id="videoPreview" class="w-100 h-100" style="object-fit:cover; object-position:center;" controls playsinline>
                                     <source src="{{ $video->file_url }}" type="video/mp4">
                                 </video>

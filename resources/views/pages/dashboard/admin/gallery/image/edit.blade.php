@@ -30,7 +30,7 @@
                         @method('PUT')
                         <div class="mb-3">
                             <input type="file" name="image_file" id="imageInput" class="d-none @error('image_file') is-invalid @enderror" accept="image/*">
-                            <img src="{{ old('image_file') ? asset('static/img/no-image-palceholder.svg') : asset($image->file_url) }}" id="imagePreview" alt="Preview Image" class="w-100 h-100 rounded object-fit-cover border" style="max-width: 500px; max-height: 250px; object-position: center; cursor: pointer;">
+                            <img src="{{ old('image_file') ? asset('static/img/no-image-placeholder.svg') : asset($image->file_url) }}" id="imagePreview" alt="Preview Image" class="w-100 h-100 rounded object-fit-cover border" style="max-width: 500px; max-height: 250px; object-position: center; cursor: pointer;">
                             <div class="mt-2 text-muted small">
                                 Click on the image to choose file
                             </div>
