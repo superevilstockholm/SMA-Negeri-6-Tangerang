@@ -15,6 +15,7 @@ if (!function_exists('adminSidebarItems')) {
                 ['label' => 'subjects', 'icon' => 'ti ti-book', 'route' => 'dashboard.admin.master-data.subjects.index', 'activePattern' => 'dashboard.admin.master-data.subjects.*'],
                 ['label' => 'classrooms', 'icon' => 'ti ti-chalkboard', 'route' => 'dashboard.admin.master-data.classrooms.index', 'activePattern' => 'dashboard.admin.master-data.classrooms.*'],
                 ['label' => 'teachers', 'icon' => 'ti ti-chalkboard-teacher', 'route' => 'dashboard.admin.master-data.teachers.index', 'activePattern' => 'dashboard.admin.master-data.teachers.*'],
+                ['label' => 'users', 'icon' => 'ti ti-user', 'route' => 'dashboard.admin.master-data.users.index', 'activePattern' => 'dashboard.admin.master-data.users.*'],
             ],
             'gallery' => [
                 ['label' => 'groups', 'icon' => 'ti ti-folders', 'route' => 'dashboard.admin.gallery.groups.index', 'activePattern' => 'dashboard.admin.gallery.groups.*'],
