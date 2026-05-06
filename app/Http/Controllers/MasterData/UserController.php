@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +15,7 @@ use App\Models\MasterData\Teacher;
 // Requests
 use App\Http\Requests\MasterData\User\IndexRequest;
 use App\Http\Requests\MasterData\User\StoreRequest;
+use App\Http\Requests\MasterData\User\UpdateRequest;
 
 // Enums
 use App\Enums\RoleEnum;
@@ -103,17 +103,43 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        //
+        $teachers = Teacher::whereDoesntHave('user')->orWhere('id', $user->teacher?->id)->orderBy('name')->get();
+
+        return view('pages.dashboard.admin.master-data.user.edit', [
+            'meta' => [
+                'sidebarItems' => adminSidebarItems(),
+            ],
+            'user' => $user->load(['teacher']),
+            'teachers' => $teachers,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        DB::transaction(function () use ($user, $validated) {
+            if ($user->role === RoleEnum::TEACHER) {
+                Teacher::where('user_id', $user->id)->update(['user_id' => null]);
+            }
+
+            $user->update($validated);
+
+            if ($validated['role'] === RoleEnum::TEACHER->value) {
+                Teacher::where('id', $validated['teacher_id'])->update(['user_id' => $user->id]);
+            }
+        });
+
+        return redirect()->route('dashboard.admin.master-data.users.index')->with('success', 'User updated successfully.');
     }
 
     /**
