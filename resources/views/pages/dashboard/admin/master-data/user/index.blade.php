@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
-@section('title', 'Classroom Management')
+@section('title', 'User Management')
 @section('content')
     @php
+        use App\Enums\RoleEnum;
         use Illuminate\Contracts\Pagination\LengthAwarePaginator;
     @endphp
     <div class="row mb-4">
@@ -10,13 +11,13 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Classroom Records</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">Manage classroom records.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">User Records</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">Manage user records.</p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.master-data.classrooms.create') }}"
+                        <a href="{{ route('dashboard.admin.master-data.users.create') }}"
                             class="btn btn-sm btn-primary px-4 rounded-pill m-0">
-                            <i class="ti ti-plus me-1"></i> Create Classroom
+                            <i class="ti ti-plus me-1"></i> Create User
                         </a>
                     </div>
                 </div>
@@ -27,7 +28,7 @@
         <div class="col">
             <div class="card my-0">
                 <div class="card-body">
-                    <form method="GET" action="{{ route('dashboard.admin.master-data.classrooms.index') }}" id="filterForm">
+                    <form method="GET" action="{{ route('dashboard.admin.master-data.users.index') }}" id="filterForm">
                         <div
                             class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-3 gap-2 gap-md-0">
                             <div class="d-flex align-items-center">
@@ -48,11 +49,11 @@
                                 <span class="ms-2">entries</span>
                             </div>
                             <div class="text-muted small">
-                                @if ($classrooms instanceof LengthAwarePaginator)
-                                    Showing {{ $classrooms->firstItem() }} to {{ $classrooms->lastItem() }} of
-                                    {{ $classrooms->total() }} entries
+                                @if ($users instanceof LengthAwarePaginator)
+                                    Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of
+                                    {{ $users->total() }} entries
                                 @else
-                                    Showing {{ $classrooms->count() }} entries
+                                    Showing {{ $users->count() }} entries
                                 @endif
                             </div>
                         </div>
@@ -90,37 +91,37 @@
                             </div>
                             {{-- Reset Buttons --}}
                             <div class="col-12 col-md-6">
-                                <a href="{{ route('dashboard.admin.master-data.classrooms.index') }}"
+                                <a href="{{ route('dashboard.admin.master-data.users.index') }}"
                                     class="btn btn-secondary w-100 d-flex align-items-center justify-content-center gap-2">
                                     <i class="ti ti-rotate-clockwise-2"></i> Reset Filters
                                 </a>
                             </div>
                         </div>
                     </form>
-                    <div class="table-responsive @if (!($classrooms instanceof LengthAwarePaginator && $classrooms->hasPages())) mb-0 @else mb-3 @endif">
+                    <div class="table-responsive @if (!($users instanceof LengthAwarePaginator && $users->hasPages())) mb-0 @else mb-3 @endif">
                         <table class="table table-striped table-hover align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Name</th>
-                                    <th>Homeroom Teacher</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Created At</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($classrooms as $index => $classroom)
+                                @forelse ($users as $index => $user)
                                     <tr>
                                         <td class="text-center">
-                                            @if ($classrooms instanceof LengthAwarePaginator)
-                                                {{ $classrooms->firstItem() + $loop->index }}
+                                            @if ($users instanceof LengthAwarePaginator)
+                                                {{ $users->firstItem() + $loop->index }}
                                             @else
                                                 {{ $loop->iteration }}
                                             @endif
                                         </td>
-                                        <td>{{ $classroom->name ?? '-' }}</td>
-                                        <td>{{ $classroom->homeroomTeacher?->name ?? '-' }}</td>
-                                        <td>{{ $classroom->created_at?->format('d M Y H:i') }}</td>
+                                        <td>{{ $user->email ?? '-' }}</td>
+                                        <td>{{ $user->role?->label() ?? '-' }}</td>
+                                        <td>{{ $user->created_at?->format('d M Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">
                                                 <button type="button" class="btn border-0 p-0 dropdown-toggle hide-arrow"
@@ -129,27 +130,27 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.master-data.classrooms.show', $classroom->id) }}">
+                                                        href="{{ route('dashboard.admin.master-data.users.show', $user->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
-                                                    @if ($classroom->homeroom_teacher_id)
+                                                    @if ($user->role === RoleEnum::TEACHER)
                                                         <a class="dropdown-item d-flex align-items-center gap-2"
-                                                            href="{{ route('dashboard.admin.master-data.teachers.show', $classroom->homeroom_teacher_id) }}">
-                                                            <i class="ti ti-eye me-1"></i> View Homeroom Teacher Details
+                                                            href="{{ route('dashboard.admin.master-data.teachers.show', $user->teacher->id) }}">
+                                                            <i class="ti ti-eye me-1"></i> View Teacher Details
                                                         </a>
                                                     @endif
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
-                                                        href="{{ route('dashboard.admin.master-data.classrooms.edit', $classroom->id) }}">
+                                                        href="{{ route('dashboard.admin.master-data.users.edit', $user->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
                                                     </a>
-                                                    <form id="form-delete-{{ $classroom->id }}"
-                                                        action="{{ route('dashboard.admin.master-data.classrooms.destroy', $classroom->id) }}"
+                                                    <form id="form-delete-{{ $user->id }}"
+                                                        action="{{ route('dashboard.admin.master-data.users.destroy', $user->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item d-flex align-items-center gap-2 text-danger btn-delete"
-                                                            data-id="{{ $classroom->id }}"
-                                                            data-name="{{ $classroom->name ?? '-' }}">
+                                                            data-id="{{ $user->id }}"
+                                                            data-email="{{ $user->email ?? '-' }}">
                                                             <i class="ti ti-trash me-1 text-danger"></i> Delete
                                                         </button>
                                                     </form>
@@ -161,7 +162,7 @@
                                     <tr>
                                         <td colspan="5" class="text-center">
                                             <div class="alert alert-warning my-2" role="alert">
-                                                No classroom records found for the selected filters.
+                                                No user records found for the selected filters.
                                             </div>
                                         </td>
                                     </tr>
@@ -169,10 +170,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($classrooms instanceof LengthAwarePaginator && $classrooms->hasPages())
+                    @if ($users instanceof LengthAwarePaginator && $users->hasPages())
                         <div class="overflow-x-auto mt-0 py-1">
                             <div class="d-flex justify-content-center d-md-block w-100 px-3">
-                                {{ $classrooms->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
+                                {{ $users->onEachSide(1)->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     @endif
@@ -186,11 +187,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.btn-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const classroomId = this.getAttribute('data-id');
-                    const classroomName = this.getAttribute('data-name');
+                    const userId = this.getAttribute('data-id');
+                    const userEmail = this.getAttribute('data-email');
                     Swal.fire({
-                        title: "Delete Classroom",
-                        text: "Are you sure you want to delete the following classroom: \"" + classroomName +
+                        title: "Delete User",
+                        text: "Are you sure you want to delete the following user: \"" + userEmail +
                             "\"? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
@@ -200,7 +201,7 @@
                         cancelButtonText: "Cancel"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            document.getElementById('form-delete-' + classroomId).submit();
+                            document.getElementById('form-delete-' + userId).submit();
                         }
                     });
                 });

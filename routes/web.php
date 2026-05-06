@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 // Master Data Controllers
+use App\Http\Controllers\MasterData\UserController;
 use App\Http\Controllers\MasterData\VisionController;
 use App\Http\Controllers\MasterData\MissionController;
 use App\Http\Controllers\MasterData\ContactController;
@@ -79,6 +80,9 @@ Route::middleware('auth')->group(function () {
                 ]);
                 Route::resource('teachers', TeacherController::class)->parameters([
                     'teachers' => 'teacher',
+                ]);
+                Route::resource('users', UserController::class)->parameters([
+                    'users' => 'user',
                 ]);
             });
             // Gallery

@@ -67,6 +67,12 @@
             <div class="card my-0">
                 <div class="card-body">
                     <h4 class="card-title fw-semibold mb-3">Quick Actions</h4>
+                    @if ($teacher->user_id)
+                        <a href="{{ route('dashboard.admin.master-data.users.show', $teacher->user_id) }}"
+                            class="btn btn-primary d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
+                            <i class="ti ti-eye me-1"></i> Show User Details
+                        </a>
+                    @endif
                     <a href="{{ route('dashboard.admin.master-data.teachers.edit', $teacher->id) }}"
                         class="btn btn-warning d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
                         <i class="ti ti-pencil me-1"></i> Edit Teacher

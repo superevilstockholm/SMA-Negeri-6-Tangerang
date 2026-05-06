@@ -1,6 +1,9 @@
 @extends('layouts.dashboard')
-@section('title', 'Classroom Details')
+@section('title', 'User Details')
 @section('content')
+    @php
+        use App\Enums\RoleEnum;
+    @endphp
     <x-alerts :errors="$errors" />
     <div class="row mb-4">
         <div class="col">
@@ -8,11 +11,11 @@
                 <div
                     class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-2 gap-lg-5">
                     <div class="d-flex flex-column">
-                        <h3 class="p-0 m-0 mb-1 fw-semibold">Classroom Details</h3>
-                        <p class="p-0 m-0 fw-medium text-muted">View detailed information about this classroom.</p>
+                        <h3 class="p-0 m-0 mb-1 fw-semibold">User Details</h3>
+                        <p class="p-0 m-0 fw-medium text-muted">View detailed information about this user.</p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('dashboard.admin.master-data.classrooms.index') }}"
+                        <a href="{{ route('dashboard.admin.master-data.users.index') }}"
                             class="btn btn-sm btn-primary d-flex align-items-center gap-2 justify-content-center px-4 rounded-pill m-0">
                             <i class="ti ti-arrow-left me-1"></i> Back to List
                         </a>
@@ -25,27 +28,33 @@
         <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title fw-semibold mb-3">Classroom Details</h4>
+                    <h4 class="card-title fw-semibold mb-3">User Details</h4>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Name</div>
-                        <div class="col-md-8 fw-medium">{{ $classroom->name ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $user->email ?? '-' }}</div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-4 text-muted">Homeroom Teacher</div>
-                        <div class="col-md-8 fw-medium">{{ $classroom->homeroomTeacher?->name ?? '-' }}</div>
+                        <div class="col-md-4 text-muted">Role</div>
+                        <div class="col-md-8 fw-medium">{{ $user->role?->label() ?? '-' }}</div>
                     </div>
+                    @if ($user->role === RoleEnum::TEACHER)
+                        <div class="row mb-3">
+                            <div class="col-md-4 text-muted">Teacher Name</div>
+                            <div class="col-md-8 fw-medium">{{ $user->teacher?->name ?? '-' }}</div>
+                        </div>
+                    @endif
                     <h4 class="card-title fw-semibold mt-4 mb-3">System Information</h4>
                     <div class="row mb-3">
-                        <div class="col-md-4 text-muted">Classroom ID</div>
-                        <div class="col-md-8 fw-medium">{{ $classroom->id ?? '-' }}</div>
+                        <div class="col-md-4 text-muted">User ID</div>
+                        <div class="col-md-8 fw-medium">{{ $user->id ?? '-' }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-muted">Created At</div>
-                        <div class="col-md-8 fw-medium">{{ $classroom->created_at?->format('d M Y H:i:s') ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $user->created_at?->format('d M Y H:i:s') ?? '-' }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-muted">Updated At</div>
-                        <div class="col-md-8 fw-medium">{{ $classroom->updated_at?->format('d M Y H:i:s') ?? '-' }}</div>
+                        <div class="col-md-8 fw-medium">{{ $user->updated_at?->format('d M Y H:i:s') ?? '-' }}</div>
                     </div>
                 </div>
             </div>
@@ -54,29 +63,29 @@
             <div class="card my-0">
                 <div class="card-body">
                     <h4 class="card-title fw-semibold mb-3">Quick Actions</h4>
-                    @if ($classroom->homeroom_teacher_id)
-                        <a href="{{ route('dashboard.admin.master-data.teachers.show', $classroom->homeroom_teacher_id) }}"
+                    @if ($user->role === RoleEnum::TEACHER)
+                        <a href="{{ route('dashboard.admin.master-data.teachers.show', $user->teacher->id) }}"
                             class="btn btn-primary d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
-                            <i class="ti ti-eye me-1"></i> View Homeroom Teacher Details
+                            <i class="ti ti-eye me-1"></i> View Teacher Details
                         </a>
                     @endif
-                    <a href="{{ route('dashboard.admin.master-data.classrooms.edit', $classroom->id) }}"
+                    <a href="{{ route('dashboard.admin.master-data.users.edit', $user->id) }}"
                         class="btn btn-warning d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
-                        <i class="ti ti-pencil me-1"></i> Edit Classroom
+                        <i class="ti ti-pencil me-1"></i> Edit User
                     </a>
-                    <form id="form-delete-{{ $classroom->id }}"
-                        action="{{ route('dashboard.admin.master-data.classrooms.destroy', $classroom->id) }}" method="POST">
+                    <form id="form-delete-{{ $user->id }}"
+                        action="{{ route('dashboard.admin.master-data.users.destroy', $user->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger d-flex align-items-center gap-2 justify-content-center w-100 btn-delete" data-id="{{ $classroom->id }}"
-                            data-name="{{ $classroom->name ?? '-' }}">
-                            <i class="ti ti-trash me-1"></i> Delete Classroom
+                        <button type="button" class="btn btn-danger d-flex align-items-center gap-2 justify-content-center w-100 btn-delete" data-id="{{ $user->id }}"
+                            data-email="{{ $user->email ?? '-' }}">
+                            <i class="ti ti-trash me-1"></i> Delete User
                         </button>
                     </form>
                     <hr class="my-4">
                     <h4 class="card-title fw-semibold mb-3">Notes</h4>
                     <p class="text-muted small">
-                        This page displays detailed information about the selected classroom. To make changes, click the "Edit Classroom" button.
+                        This page displays detailed information about the selected user. To make changes, click the "Edit User" button.
                     </p>
                 </div>
             </div>
@@ -86,11 +95,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.btn-delete').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const classroomId = this.getAttribute('data-id');
-                    const classroomName = this.getAttribute('data-name');
+                    const userId = this.getAttribute('data-id');
+                    const userEmail = this.getAttribute('data-email');
                     Swal.fire({
-                        title: "Delete Classroom",
-                        text: "Are you sure you want to delete the following classroom: \"" + classroomName +
+                        title: "Delete User",
+                        text: "Are you sure you want to delete the following user: \"" + userEmail +
                             "\"? This action cannot be undone.",
                         icon: "warning",
                         showCancelButton: true,
@@ -100,7 +109,7 @@
                         cancelButtonText: "Cancel"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            document.getElementById('form-delete-' + classroomId).submit();
+                            document.getElementById('form-delete-' + userId).submit();
                         }
                     });
                 });
