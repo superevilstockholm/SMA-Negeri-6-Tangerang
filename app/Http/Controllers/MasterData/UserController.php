@@ -129,7 +129,9 @@ class UserController extends Controller
 
         DB::transaction(function () use ($user, $validated) {
             if ($user->role === RoleEnum::TEACHER) {
-                Teacher::where('user_id', $user->id)->update(['user_id' => null]);
+                if ($validated['role'] !== RoleEnum::TEACHER->value || $user->teacher?->id != $validated['teacher_id']) {
+                    Teacher::where('user_id', $user->id)->update(['user_id' => null]);
+                }
             }
 
             $user->update($validated);
@@ -145,8 +147,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        DB::transaction(function () use ($user) {
+            if ($user->role === RoleEnum::TEACHER) {
+                $user->teacher()->update(['user_id' => null]);
+            }
+
+            $user->delete();
+        });
+
+        return redirect()->route('dashboard.admin.master-data.users.index')->with('success', 'User deleted successfully.');
     }
 }
