@@ -183,6 +183,12 @@
                                                         href="{{ route('dashboard.admin.master-data.teachers.show', $teacher->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
+                                                    @if ($teacher->user_id)
+                                                        <a class="dropdown-item d-flex align-items-center gap-2"
+                                                            href="{{ route('dashboard.admin.master-data.users.show', $teacher->user_id) }}">
+                                                            <i class="ti ti-eye me-1"></i> View User Details
+                                                        </a>
+                                                    @endif
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.teachers.edit', $teacher->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit

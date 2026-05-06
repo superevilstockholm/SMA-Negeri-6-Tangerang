@@ -131,7 +131,7 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.users.show', $user->id) }}">
-                                                        <i class="ti ti-eye me-1"></i> View User Details
+                                                        <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
                                                     @if ($user->role === RoleEnum::TEACHER)
                                                         <a class="dropdown-item d-flex align-items-center gap-2"
