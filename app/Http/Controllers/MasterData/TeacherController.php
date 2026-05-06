@@ -154,6 +154,10 @@ class TeacherController extends Controller
             Storage::disk('public')->delete($teacher->photo_path);
         }
 
+        if ($teacher->user) {
+            $teacher->user->delete();
+        }
+
         $teacher->delete();
 
         return redirect()->route('dashboard.admin.master-data.teachers.index')->with('success', 'Teacher deleted successfully.');
