@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MasterData;
 
 use Carbon\Carbon;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -154,11 +155,13 @@ class TeacherController extends Controller
             Storage::disk('public')->delete($teacher->photo_path);
         }
 
-        if ($teacher->user) {
-            $teacher->user->delete();
-        }
+        DB::transaction(function () use ($teacher) {
+            if ($teacher->user) {
+                $teacher->user->delete();
+            }
 
-        $teacher->delete();
+            $teacher->delete();
+        });
 
         return redirect()->route('dashboard.admin.master-data.teachers.index')->with('success', 'Teacher deleted successfully.');
     }
