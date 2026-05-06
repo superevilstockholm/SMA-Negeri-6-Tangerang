@@ -54,6 +54,12 @@
             <div class="card my-0">
                 <div class="card-body">
                     <h4 class="card-title fw-semibold mb-3">Quick Actions</h4>
+                    @if ($classroom->homeroom_teacher_id)
+                        <a href="{{ route('dashboard.admin.master-data.teachers.show', $classroom->homeroom_teacher_id) }}"
+                            class="btn btn-primary d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
+                            <i class="ti ti-eye me-1"></i> View Homeroom Teacher Details
+                        </a>
+                    @endif
                     <a href="{{ route('dashboard.admin.master-data.classrooms.edit', $classroom->id) }}"
                         class="btn btn-warning d-flex align-items-center gap-2 justify-content-center w-100 mb-2">
                         <i class="ti ti-pencil me-1"></i> Edit Classroom

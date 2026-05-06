@@ -1,7 +1,7 @@
 @php
     use Illuminate\Support\Str;
 @endphp
-<header class="pc-header">
+<header class="pc-header" style="z-index: 999999999999;">
     <div class="header-wrapper">
         <div class="me-auto pc-mob-drp">
             <ul class="list-unstyled">

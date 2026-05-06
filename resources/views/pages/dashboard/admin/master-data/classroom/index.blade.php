@@ -132,6 +132,12 @@
                                                         href="{{ route('dashboard.admin.master-data.classrooms.show', $classroom->id) }}">
                                                         <i class="ti ti-eye me-1"></i> View Details
                                                     </a>
+                                                    @if ($classroom->homeroom_teacher_id)
+                                                        <a class="dropdown-item d-flex align-items-center gap-2"
+                                                            href="{{ route('dashboard.admin.master-data.teachers.show', $classroom->homeroom_teacher_id) }}">
+                                                            <i class="ti ti-eye me-1"></i> View Homeroom Teacher Details
+                                                        </a>
+                                                    @endif
                                                     <a class="dropdown-item d-flex align-items-center gap-2"
                                                         href="{{ route('dashboard.admin.master-data.classrooms.edit', $classroom->id) }}">
                                                         <i class="ti ti-pencil me-1"></i> Edit
